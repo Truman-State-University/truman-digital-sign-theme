@@ -1,0 +1,249 @@
+@charset "utf-8";
+/*
+Theme Name: Truman Digital Sign Theme
+Theme URI:
+Author: Greg Marshall
+Author URI:
+Description: Bootstrap Based Digital Sign
+Version: 0.1
+
+ */
+
+
+/* =WordPress Core
+-------------------------------------------------------------- */
+.alignnone {
+    margin: 5px 20px 20px 0;
+}
+
+.aligncenter,
+div.aligncenter {
+    display: block;
+    margin: 5px auto 5px auto;
+}
+
+.alignright {
+    float:right;
+    margin: 5px 0 20px 20px;
+}
+
+.alignleft {
+    float: left;
+    margin: 5px 20px 20px 0;
+}
+
+a img.alignright {
+    float: right;
+    margin: 5px 0 20px 20px;
+}
+
+a img.alignnone {
+    margin: 5px 20px 20px 0;
+}
+
+a img.alignleft {
+    float: left;
+    margin: 5px 20px 20px 0;
+}
+
+a img.aligncenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.wp-caption {
+    background: #fff;
+    border: 1px solid #f0f0f0;
+    max-width: 96%; /* Image does not overflow the content area */
+    padding: 5px 3px 10px;
+    text-align: center;
+}
+
+.wp-caption.alignnone {
+    margin: 5px 20px 20px 0;
+}
+
+.wp-caption.alignleft {
+    margin: 5px 20px 20px 0;
+}
+
+.wp-caption.alignright {
+    margin: 5px 0 20px 20px;
+}
+
+.wp-caption img {
+    border: 0 none;
+    height: auto;
+    margin: 0;
+    max-width: 98.5%;
+    padding: 0;
+    width: auto;
+}
+
+.wp-caption p.wp-caption-text {
+    font-size: 11px;
+    line-height: 17px;
+    margin: 0;
+    padding: 0 4px 5px;
+}
+
+/* Text meant only for screen readers. */
+.screen-reader-text {
+	clip: rect(1px, 1px, 1px, 1px);
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+}
+
+.screen-reader-text:focus {
+	background-color: #f1f1f1;
+	border-radius: 3px;
+	box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+	clip: auto !important;
+	color: #21759b;
+	display: block;
+	font-size: 14px;
+	font-size: 0.875rem;
+	font-weight: bold;
+	height: auto;
+	left: 5px;
+	line-height: normal;
+	padding: 15px 23px 14px;
+	text-decoration: none;
+	top: 5px;
+	width: auto;
+	z-index: 100000; /* Above WP toolbar. */
+}
+
+html, body {
+    margin:0;
+    padding:0;
+    height:100%;
+    cursor:none;
+}
+a {
+    cursor:none;
+}
+.row-no-padding [class*="col-"] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+div.slidecontent {
+    width:100%;
+    height:100%;
+    min-height:100px;
+    overflow:hidden;
+    display:block;
+    font-size: 6rem;
+    font-family: 'Montserrat', sans-serif;
+    overflow: hidden;
+}
+div.slidecontent .textcontent {
+    margin: 0 5%;
+}
+div.slidecontent h1 {
+    font-size: 10rem;
+}
+
+div.slidecontent img {
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+    width: auto;
+}
+
+.sidebar {
+    background: rgba(0,0,0,.5);
+    font-family: 'Montserrat', sans-serif;
+}
+.sidebar .widget-area {
+    margin: 0 2%;
+}
+#footer {
+    height: 15%;
+    background: #000;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.clock {
+    width: 98%;
+    margin: 0 auto 0 auto;
+    padding: 0;
+    color: #fff;
+}
+
+#Date {
+    font-size: 1.875em;
+    text-align: center;
+    margin-top: 10px;
+    display: block;
+    float: none;
+    position: relative;
+}
+
+.clock ul {
+    width: 100%;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    list-style: none;
+    text-align: center;
+    display: block;
+    line-height: 1.1;
+}
+
+.clock ul li {
+    display: inline;
+    text-align: center;
+    font-size: 6rem;
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+}
+
+#point {
+    padding: 0;
+    font-size: 7rem;
+    position: relative;
+    display: inline;
+    -moz-animation: mymove 1s ease infinite;
+    -webkit-animation: mymove 1s ease infinite;
+}
+
+.crs_div {
+    color: #fff;
+    font-size: 2.8rem;
+}
+.crs_div a {
+    color: #fff;
+}
+
+.widget-footer {
+    text-align: center;
+}
+tr.forecast {
+    background: rgba(255,255,255,.9);
+}
+.wp_wunderground img {
+    width: 20rem;
+    height: 20rem;
+    max-width: 100%;
+}
+.wu-forecast-body {
+    font-size: 2rem;
+}
+.wu-forecast-wrapper .wu-cond-highlow .wu-cond-low {
+    display: block;
+}
+.wu-table-5 {
+    width: 100%;
+    text-align: center;
+}
+.rssfeed a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 4rem;
+}
