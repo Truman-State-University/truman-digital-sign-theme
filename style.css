@@ -126,6 +126,9 @@ html, body {
 a {
     cursor:none;
 }
+.row-no-padding {
+    width: 100%;
+}
 .row-no-padding [class*="col-"] {
     padding-left: 0 !important;
     padding-right: 0 !important;
