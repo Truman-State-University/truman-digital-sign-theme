@@ -240,7 +240,7 @@ function remove_admin_bar() {
 function trumansign_ajaxcontent() {
     define( 'WP_USE_THEMES', false );
     global $wp_query;
-    query_posts('posts_per_page=-1');
+    query_posts('posts_status=publish');
     get_template_part( 'slides');
     die();
 }
