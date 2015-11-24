@@ -172,6 +172,7 @@ div.slidecontent img {
     height: 15%;
     background: #000;
     font-family: 'Josefin Sans', sans-serif;
+    width: 100%;
 }
 
 .clock {
