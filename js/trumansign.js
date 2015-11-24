@@ -17,10 +17,10 @@ function setheights() {
 }
 
 function updateContent(){
-    jQuery( ".carousel-inner" ).load( ajax_object.ajax_url + '?action=get_ajax_content' );
-    setheights();
+    jQuery( ".carousel-inner" ).load( ajax_object.ajax_url + '?action=get_ajax_content', function() {
+        setheights();
+    } );
     jQuery( "#footer" ).load( ajax_object.ajax_url + '?action=get_ajax_sidebar&sidebar=footer' );
 //    jQuery( ".sidebar" ).load( ajax_object.ajax_url + '?action=get_ajax_sidebar&sidebar=home-right' );
-    setheights();
     setInterval(updateContent,300000);
 }
