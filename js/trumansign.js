@@ -13,7 +13,7 @@ function setheights() {
     winheight = jQuery(window).height();
     jQuery('.slidecontent').height(winheight * .85  );
     jQuery('.sidebar').height(winheight * .85);
-
+    jQuery('#footer').height(winheight * .15);
 }
 
 function updateContent(){

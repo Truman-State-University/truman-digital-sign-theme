@@ -40,6 +40,7 @@
 </head>
 
 <body <?php body_class(); ?>>
+<div class="container-fluid">
 <?php
 echo('<div class="row row-no-padding">');
 	if ( get_theme_mod( 'sidebar' ) == '1') {

@@ -126,9 +126,7 @@ html, body {
 a {
     cursor:none;
 }
-.row-no-padding {
-    width: 100%;
-}
+
 .row-no-padding [class*="col-"] {
     padding-left: 0 !important;
     padding-right: 0 !important;
@@ -172,7 +170,6 @@ div.slidecontent img {
     height: 15%;
     background: #000;
     font-family: 'Josefin Sans', sans-serif;
-    width: 100%;
     overflow: hidden;
 }
 
