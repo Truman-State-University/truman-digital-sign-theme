@@ -140,6 +140,7 @@ div.slidecontent {
     font-size: 6rem;
     font-family: 'Montserrat', sans-serif;
     overflow: hidden;
+    background-position: center;
 }
 div.slidecontent .textcontent {
     margin: 0 5%;
@@ -156,8 +157,9 @@ div.slidecontent img {
 }
 
 .sidebar {
-    background: rgba(0,0,0,.5);
+    background: #000000;
     font-family: 'Montserrat', sans-serif;
+    background-position: center;
 }
 .sidebar .widget-area {
     margin: 0 2%;
@@ -246,4 +248,8 @@ tr.forecast {
     text-decoration: none;
     color: #fff;
     font-size: 4rem;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: rgba(5,5,5,.3);
 }
