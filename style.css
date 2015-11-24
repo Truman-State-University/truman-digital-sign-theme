@@ -164,6 +164,9 @@ div.slidecontent img {
     overflow: hidden;
     font-size: 2rem;
 }
+.sidebar h4, .sidebar h4 {
+    font-size: 3rem;
+}
 .sidebar .widget-area {
     margin: 0 2%;
 }
