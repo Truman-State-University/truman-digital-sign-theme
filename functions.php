@@ -24,12 +24,18 @@ add_action('save_post', 'trumansign_save_details');
 add_action( 'customize_register', 'trumansign_customize_register' );
 add_action('after_setup_theme', 'remove_admin_bar');
 add_action( 'wp_head', 'trumansign_custom_css_output');
+add_action('wp_ajax_get_ajax_content', 'trumansign_ajaxcontent');
+add_action('wp_ajax_nopriv_get_ajax_content', 'trumansign_ajaxcontent');
+add_action('wp_ajax_get_ajax_sidebar', 'trumansign_ajaxsidebar');
+add_action('wp_ajax_nopriv_get_ajax_sidebar', 'trumansign_ajaxsidebar');
+
 
 function trumansign_scripts() {
     wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css');
     wp_enqueue_style( 'theme-style', get_stylesheet_uri() );
     wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', array('jquery'), '3.3.4', true);
     wp_enqueue_script( 'theme-scripts', get_template_directory_uri() . '/js/trumansign.js', array('jquery'));
+    wp_localize_script( 'theme-scripts', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
 }
 
 
@@ -176,7 +182,7 @@ function trumansign_custom_css_output() {
 
 function trumansign_meta_boxes()
 {
-    add_meta_box("slidecolor", "Select Colors", "trumansign_metaboxes", "post", "normal", "high");
+    add_meta_box("slidecolor", "Slide Settings", "trumansign_metaboxes", "post", "normal", "high");
 }
 
 
@@ -229,5 +235,23 @@ function trumansign_save_details()
 
 function remove_admin_bar() {
     show_admin_bar(false);
+}
+
+function trumansign_ajaxcontent() {
+    define( 'WP_USE_THEMES', false );
+    global $wp_query;
+    query_posts('posts_per_page=-1');
+    get_template_part( 'slides');
+    die();
+}
+
+function trumansign_ajaxsidebar() {
+    $sidebar = $_GET['sidebar'];
+    if ($sidebar == 'footer') {
+        dynamic_sidebar('footer');
+    } else {
+        dynamic_sidebar('home-right');
+    }
+    die();
 }
 ?>

@@ -138,7 +138,7 @@ div.slidecontent {
     overflow:hidden;
     display:block;
     font-size: 6rem;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Josefin Sans', sans-serif;
     overflow: hidden;
     background-position: center;
 }
@@ -158,8 +158,9 @@ div.slidecontent img {
 
 .sidebar {
     background: #000000;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Josefin Sans', sans-serif;
     background-position: center;
+    overflow: hidden;
 }
 .sidebar .widget-area {
     margin: 0 2%;
@@ -167,7 +168,7 @@ div.slidecontent img {
 #footer {
     height: 15%;
     background: #000;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Josefin Sans', sans-serif;
 }
 
 .clock {
