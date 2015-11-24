@@ -229,7 +229,7 @@ div.slidecontent img {
 tr.forecast {
     background: rgba(255,255,255,.9);
 }
-.wp_wunderground img {
+.slidecontent .wp_wunderground img {
     width: 20rem;
     height: 20rem;
     max-width: 100%;
@@ -252,4 +252,8 @@ tr.forecast {
 
 .table-striped>tbody>tr:nth-of-type(odd) {
     background-color: rgba(5,5,5,.3);
+}
+
+#footer .wu-copyright {
+    display: none;
 }
