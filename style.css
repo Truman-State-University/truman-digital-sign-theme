@@ -162,6 +162,7 @@ div.slidecontent img {
     font-family: 'Josefin Sans', sans-serif;
     background-position: center;
     overflow: hidden;
+    font-size: 2rem;
 }
 .sidebar .widget-area {
     margin: 0 2%;
