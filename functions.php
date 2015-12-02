@@ -42,11 +42,13 @@ function trumansign_scripts() {
 
 
 function trumansign_admin_script() {
-    global $post_type;
-    if( 'post' == $post_type )
-        wp_enqueue_script( 'jquery-minicolors-script', get_stylesheet_directory_uri() . '/jquery-minicolors-master/jquery.minicolors.js', array('jquery') );
-        wp_enqueue_script( 'trumansign-admin', get_stylesheet_directory_uri() . '/js/trumansign-admin.js', array('jquery') );
-        wp_enqueue_style( 'jquery-minicolors-script', get_stylesheet_directory_uri() . '/jquery-minicolors-master/jquery.minicolors.css' );
+    global $post;
+    $post_type = $post->post_type;
+    if( 'post' == $post_type ) {
+        wp_enqueue_script('jquery-minicolors-script', get_stylesheet_directory_uri() . '/jquery-minicolors-master/jquery.minicolors.js', array('jquery'));
+        wp_enqueue_script('trumansign-admin', get_stylesheet_directory_uri() . '/js/trumansign-admin.js', array('jquery'));
+        wp_enqueue_style('jquery-minicolors-script', get_stylesheet_directory_uri() . '/jquery-minicolors-master/jquery.minicolors.css');
+    }
 }
 
 function trumansign_customize_register( $wp_customize )
