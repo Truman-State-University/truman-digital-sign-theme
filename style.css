@@ -264,3 +264,10 @@ tr.forecast {
 #footer .wu-copyright {
     display: none;
 }
+
+#footer span.wu-day-current-temp, #footer .wu-day-title * {
+    color: #fff;
+}
+#footer .wu-wrapper {
+    margin-top: 2rem;
+}
