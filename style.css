@@ -8,6 +8,22 @@ Description: Bootstrap Based Digital Sign
 Version: 0.1
 
  */
+@media (min-width: 600px) {
+    html {
+        font-size: 4px;
+    }
+}
+
+@media (min-width: 800px) {
+    html {
+        font-size: 6px;
+    }
+}
+@media (min-width: 1200px) {
+    html {
+        font-size: 8px;
+    }
+}
 
 
 /* =WordPress Core
@@ -185,7 +201,7 @@ div.slidecontent img {
 }
 
 #Date {
-    font-size: 1.875em;
+    font-size: 3rem;
     text-align: center;
     margin-top: 10px;
     display: block;
@@ -195,12 +211,12 @@ div.slidecontent img {
 
 .clock ul {
     width: 100%;
-    margin: 0 auto !important;
+    margin: 2rem auto !important;
     padding: 0 !important;
     list-style: none;
     text-align: center;
     display: block;
-    line-height: 1.1;
+    line-height: 125%;
 }
 
 .clock ul li {
@@ -232,13 +248,17 @@ div.slidecontent img {
 
 .widget-footer {
     text-align: center;
+    height: 100%;
+}
+.widget-footer .textwidget {
+    height: 100%;
 }
 tr.forecast {
     background: rgba(255,255,255,.9);
 }
 .slidecontent .wp_wunderground img {
-    width: 20rem;
-    height: 20rem;
+    width: 8rem;
+    height: 8rem;
     max-width: 100%;
 }
 .wu-forecast-body {
@@ -270,4 +290,15 @@ tr.forecast {
 }
 #footer .wu-wrapper {
     margin-top: 2rem;
+}
+#footer .wu-day-title {
+    font-size: 8rem;
+}
+#footer .wu-day-title small {
+    font-size: 2rem;
+    margin-left: -1.5rem;
+}
+#footer .wu-icon img {
+    width: 10rem;
+    height: 10rem;
 }

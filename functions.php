@@ -243,17 +243,25 @@ function trumansign_ajaxcontent() {
     define( 'WP_USE_THEMES', false );
     global $wp_query;
     query_posts('post_status=publish');
+    ob_start();
     get_template_part( 'slides');
+    $content = ob_get_contents();
+    ob_end_clean();
+    echo preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $content);
     die();
 }
 
 function trumansign_ajaxsidebar() {
     $sidebar = $_GET['sidebar'];
+    ob_start();
     if ($sidebar == 'footer') {
         dynamic_sidebar('footer');
     } else {
         dynamic_sidebar('home-right');
     }
+    $sidebar = ob_get_contents();
+    ob_end_clean();
+    echo preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $sidebar);
     die();
 }
 ?>

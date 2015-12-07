@@ -45,10 +45,10 @@
 echo('<div class="row row-no-padding">');
 	if ( get_theme_mod( 'sidebar' ) == '1') {
 		if ( get_theme_mod( 'sidebar_align' ) == 'right') {
-			echo('<div class="col-md-8 first">');
+			echo('<div class="col-md-8 col-sm-8 first">');
 		} else {
 			if ( get_theme_mod( 'sidebar_align' ) == 'left') {
-				echo('<div class="col-md-4 first sidebar">');
+				echo('<div class="col-md-4 col-sm-4 first sidebar">');
 				dynamic_sidebar( 'home-right' );
 				echo('</div>');
 			}

@@ -22,5 +22,4 @@ function updateContent(){
     } );
     jQuery( "#footer" ).load( ajax_object.ajax_url + '?action=get_ajax_sidebar&sidebar=footer' );
 //    jQuery( ".sidebar" ).load( ajax_object.ajax_url + '?action=get_ajax_sidebar&sidebar=home-right' );
-    setInterval(updateContent,300000);
 }
