@@ -165,6 +165,19 @@ function trumansign_customize_register( $wp_customize )
             ),
         )
     );
+
+    $wp_customize->add_setting(
+        'slideeffect'
+    );
+
+    $wp_customize->add_control(
+        'slideeffect',
+        array(
+            'type' => 'checkbox',
+            'label' => 'Use Slide Effect:',
+            'section' => 'trumansign_settings',
+        )
+    );
 }
 
 function trumansign_custom_css_output() {
