@@ -28,7 +28,7 @@ add_action('wp_ajax_get_ajax_content', 'trumansign_ajaxcontent');
 add_action('wp_ajax_nopriv_get_ajax_content', 'trumansign_ajaxcontent');
 add_action('wp_ajax_get_ajax_sidebar', 'trumansign_ajaxsidebar');
 add_action('wp_ajax_nopriv_get_ajax_sidebar', 'trumansign_ajaxsidebar');
-
+add_action('pre_get_posts','change_num_posts');
 
 function trumansign_scripts() {
     wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css');
@@ -276,5 +276,12 @@ function trumansign_ajaxsidebar() {
     ob_end_clean();
     echo preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $sidebar);
     die();
+}
+
+function change_num_posts($qry) {
+    if ( $qry->is_main_query() ) {
+        $qry->set('posts_per_page','-1');
+    }
+
 }
 ?>
