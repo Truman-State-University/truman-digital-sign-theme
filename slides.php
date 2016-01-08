@@ -6,15 +6,20 @@
     $hidetitle = $custom["hidetitle"][0];
     $slideimage = $custom["slideimage"][0];
     $slideimagesize = $custom["slideimagesize"][0];
+    $slideduration = $custom["slideduration"][0];
 
     if ($slideimage != "") {
         $stylestr = " background-image: url('{$slideimage}'); background-size: {$slideimagesize}; background-repeat: no-repeat";
     } else {
         $stylestr = "";
     }
+    if ($slideduration == "") {
+        $slideduration = 8;
+    }
+
     ?>
 
-    <div class="item<?php if ($wp_query->current_post == 0) { echo " active"; } ?>">
+    <div class="item<?php if ($wp_query->current_post == 0) { echo " active"; } ?>"  data-interval="<?php echo $slideduration*1000;?>">
         <div class="slidecontent" style="background-color: <?php echo $bgcolor;?>; color: <?php echo $textcolor;?>; <?php echo $stylestr;?>">
 
             <div class="textcontent">

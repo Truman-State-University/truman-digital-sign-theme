@@ -210,6 +210,10 @@ function trumansign_metaboxes()
     $hidetitle = $custom["hidetitle"][0];
     $slideimage = $custom["slideimage"][0];
     $slideimagesize = $custom["slideimagesize"][0];
+    $slideduration = $custom["slideduration"][0];
+    if ($slideduration == '') {
+        $slideduration = 8;
+    }
     ?>
     <p><label for="bgcolor">Select Background Color: </label>
         <input type="text" id="bgcolor" name="bgcolor" value="<?php echo $bgcolor; ?>" style="height: auto;"></p>
@@ -228,6 +232,16 @@ function trumansign_metaboxes()
         <input type="text" id="textcolor" name="textcolor" value="<?php echo $textcolor; ?>" style="height: auto;"></p>
     <p><label for="hidetitle">Hide Title: </label>
         <input type="checkbox" id="hidetitle" name="hidetitle" value="1" <?php if ($hidetitle == 1) { echo "checked=\"checked\""; }; ?>" /></p>
+    <p><label for="slideduration">Slide Duration: </label>
+        <select name="slideduration" id="slideduration">
+            <?php for ($i = 1; $i <= 20; $i++) {
+                ?>
+                <option value="<?php echo $i; ?>"<?php if ($slideduration == $i) { echo "selected=\"selected\""; }; ?>><?php echo $i; ?></option>
+                <?php
+            }
+            ?>
+        </select> Seconds
+    </p>
 
     <?php
 }
@@ -245,6 +259,7 @@ function trumansign_save_details()
     }
     update_post_meta($post->ID, "slideimage", $_POST["slideimage"]);
     update_post_meta($post->ID, "slideimagesize", $_POST["slideimagesize"]);
+    update_post_meta($post->ID, "slideduration", $_POST["slideduration"]);
 
 }
 
@@ -255,7 +270,7 @@ function remove_admin_bar() {
 function trumansign_ajaxcontent() {
     define( 'WP_USE_THEMES', false );
     global $wp_query;
-    query_posts('post_status=publish');
+    query_posts('post_status=publish&posts_per_page=-1');
     ob_start();
     get_template_part( 'slides');
     $content = ob_get_contents();

@@ -1,9 +1,25 @@
 /**
  * Created by gmarsh on 11/23/15.
  */
+var t;
+
 jQuery( window).ready( function(){
     setheights();
     setInterval(updateContent,300000);
+
+    var start = jQuery('#slide-carousel').find('.active').attr('data-interval');
+    if(!t){
+        t = setTimeout("jQuery('#slide-carousel').carousel('next');", start);
+    }
+    jQuery('#slide-carousel').on('slid.bs.carousel', function () {
+        var duration = jQuery(this).find('.active').attr('data-interval');
+        if(t){
+            clearTimeout(t);
+            t = null;
+        }
+        t = setTimeout("jQuery('#slide-carousel').carousel('next');", duration);
+    })
+
 } );
 
 
@@ -34,3 +50,5 @@ function updateContent(){
 //    jQuery( ".sidebar" ).load( ajax_object.ajax_url + '?action=get_ajax_sidebar&sidebar=home-right' );
 
 }
+
+
