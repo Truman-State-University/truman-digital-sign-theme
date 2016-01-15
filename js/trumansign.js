@@ -11,6 +11,11 @@ jQuery( window).ready( function(){
     if(!t){
         t = setTimeout("jQuery('#slide-carousel').carousel('next');", start);
     }
+    if (jQuery(this).find('.active').find('.slidevideo')) {
+        console.log(jQuery(this).find('.active').find('.slidevideo'));
+        jQuery(this).find('.active').find('.slidevideo')[0].play();
+    }
+
     jQuery('#slide-carousel').on('slid.bs.carousel', function () {
         var duration = jQuery(this).find('.active').attr('data-interval');
         if(t){
@@ -18,6 +23,10 @@ jQuery( window).ready( function(){
             t = null;
         }
         t = setTimeout("jQuery('#slide-carousel').carousel('next');", duration);
+        if (jQuery(this).find('.active').find('.slidevideo')) {
+            console.log(jQuery(this).find('.active').find('.slidevideo'));
+            jQuery(this).find('.active').find('.slidevideo')[0].play();
+        }
     })
 
 } );

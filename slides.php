@@ -7,6 +7,7 @@
     $slideimage = $custom["slideimage"][0];
     $slideimagesize = $custom["slideimagesize"][0];
     $slideduration = $custom["slideduration"][0];
+    $slidevideo = $custom["slidevideo"][0];
 
     if ($slideimage != "") {
         $stylestr = " background-image: url('{$slideimage}'); background-size: {$slideimagesize}; background-repeat: no-repeat";
@@ -21,7 +22,13 @@
 
     <div class="item<?php if ($wp_query->current_post == 0) { echo " active"; } ?>"  data-interval="<?php echo $slideduration*1000;?>">
         <div class="slidecontent" style="background-color: <?php echo $bgcolor;?>; color: <?php echo $textcolor;?>; <?php echo $stylestr;?>">
-
+            <?php if ($slidevideo != "") {
+                ?>
+                <video controls="false" class="slidevideo">
+                    <source src="<?php echo $slidevideo; ?>" type="video/mp4" />
+                </video>
+                <?php
+            } ?>
             <div class="textcontent">
                 <?php if ($hidetitle != "1") {
                     echo("<h1>" . get_the_title() ."</h1>");

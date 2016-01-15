@@ -210,6 +210,7 @@ function trumansign_metaboxes()
     $hidetitle = $custom["hidetitle"][0];
     $slideimage = $custom["slideimage"][0];
     $slideimagesize = $custom["slideimagesize"][0];
+    $slidevideo = $custom["slidevideo"][0];
     $slideduration = $custom["slideduration"][0];
     if ($slideduration == '') {
         $slideduration = 8;
@@ -219,7 +220,7 @@ function trumansign_metaboxes()
         <input type="text" id="bgcolor" name="bgcolor" value="<?php echo $bgcolor; ?>" style="height: auto;"></p>
     <p><label for="slideimage">Background Image: </label>
         <input type="text" id="slideimage" name="slideimage" value="<?php echo $slideimage; ?>" style="height: auto;" size="70">
-        <input type="button" class="button" name="slideimage_button" id="slideimage_button" value="Upload/Browse"/>
+        <input type="button" class="button custom_media" name="slideimage_button" id="slideimage_button" value="Upload/Browse"/>
     </p>
     <p><label for="slideimagesize">Background Image Size: </label>
         <select name="slideimagesize" id="slideimagesize">
@@ -227,6 +228,10 @@ function trumansign_metaboxes()
             <option value="contain"<?php if ($slideimagesize == "contain") { echo "selected=\"selected\""; }; ?>>Fit Inside</option>
             <option value="100% 100%"<?php if ($slideimagesize == "100% 100%") { echo "selected=\"selected\""; }; ?>>Stretch</option>
         </select>
+    </p>
+    <p><label for="slidevideo">Slide Video (Upload MP4 file):</label>
+        <input type="text" id="slidevideo" name="slidevideo" value="<?php echo $slidevideo; ?>" style="height: auto;" size="70">
+        <input type="button" class="button custom_media" name="slidevideo_button" id="slidevideo_button" value="Upload/Browse"/>
     </p>
     <p><label for="textcolor">Select Text Color: </label>
         <input type="text" id="textcolor" name="textcolor" value="<?php echo $textcolor; ?>" style="height: auto;"></p>
@@ -258,6 +263,7 @@ function trumansign_save_details()
         delete_post_meta($post->ID, "hidetitle");
     }
     update_post_meta($post->ID, "slideimage", $_POST["slideimage"]);
+    update_post_meta($post->ID, "slidevideo", $_POST["slidevideo"]);
     update_post_meta($post->ID, "slideimagesize", $_POST["slideimagesize"]);
     update_post_meta($post->ID, "slideduration", $_POST["slideduration"]);
 
