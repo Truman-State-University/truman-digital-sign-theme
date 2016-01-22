@@ -11,7 +11,7 @@ jQuery( window).ready( function(){
     if(!t){
         t = setTimeout("jQuery('#slide-carousel').carousel('next');", start);
     }
-    if (jQuery(this).find('.active').find('.slidevideo')) {
+    if (jQuery(this).find('.active').find('.slidevideo').length > 0) {
         console.log(jQuery(this).find('.active').find('.slidevideo'));
         jQuery(this).find('.active').find('.slidevideo')[0].play();
     }
