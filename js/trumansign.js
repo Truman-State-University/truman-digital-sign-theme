@@ -1,30 +1,24 @@
 /**
  * Created by gmarsh on 11/23/15.
  */
-var t;
+//var t;
 
 jQuery( window).ready( function(){
     setheights();
     setInterval(updateContent,300000);
 
     var start = jQuery('#slide-carousel').find('.active').attr('data-interval');
-    if(!t){
-        t = setTimeout("jQuery('#slide-carousel').carousel('next');", start);
+    if(typeof t == 'undefined'){
+        var t = setTimeout("jQuery('#slide-carousel').carousel('next');", start);
     }
     if (jQuery(this).find('.active').find('.slidevideo').length > 0) {
-        console.log(jQuery(this).find('.active').find('.slidevideo'));
         jQuery(this).find('.active').find('.slidevideo')[0].play();
     }
 
     jQuery('#slide-carousel').on('slid.bs.carousel', function () {
         var duration = jQuery(this).find('.active').attr('data-interval');
-        if(t){
-            clearTimeout(t);
-            t = null;
-        }
-        t = setTimeout("jQuery('#slide-carousel').carousel('next');", duration);
-        if (jQuery(this).find('.active').find('.slidevideo')) {
-            console.log(jQuery(this).find('.active').find('.slidevideo'));
+        var t = setTimeout("jQuery('#slide-carousel').carousel('next');", duration);
+        if (jQuery(this).find('.active').find('.slidevideo').length > 0) {
             jQuery(this).find('.active').find('.slidevideo')[0].play();
         }
     })
