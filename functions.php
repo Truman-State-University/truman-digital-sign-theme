@@ -29,15 +29,24 @@ add_action('wp_ajax_nopriv_get_ajax_content', 'trumansign_ajaxcontent');
 add_action('wp_ajax_get_ajax_sidebar', 'trumansign_ajaxsidebar');
 add_action('wp_ajax_nopriv_get_ajax_sidebar', 'trumansign_ajaxsidebar');
 add_action('pre_get_posts','change_num_posts');
+add_filter('widget_text', 'do_shortcode');
 
-function trumansign_scripts() {
-    wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css');
-    wp_enqueue_style( 'theme-style', get_stylesheet_uri() );
-    wp_enqueue_script( 'bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', array('jquery'), '3.3.4', true);
-    wp_enqueue_script( 'theme-scripts', get_template_directory_uri() . '/js/trumansign.js', array('jquery'));
-    wp_localize_script( 'theme-scripts', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
+
+function trumansign_scripts()
+{
+    wp_enqueue_style('bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css');
+    wp_enqueue_style('theme-style', get_stylesheet_uri());
+    wp_enqueue_script('bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', array('jquery'), '3.3.4', true);
+    wp_enqueue_script('theme-scripts', get_template_directory_uri() . '/js/trumansign.js', array('jquery'));
+    wp_localize_script('theme-scripts', 'ajax_object',
+        array(
+            'ajax_url' => admin_url('admin-ajax.php'),
+            'refresh_slides' => get_theme_mod('refresh_slides'),
+            'refresh_sidebar' => get_theme_mod('refresh_sidebar'),
+            'refresh_footer' => get_theme_mod('refresh_footer')
+        )
+    );
 }
-
 
 
 
@@ -71,7 +80,7 @@ function trumansign_customize_register( $wp_customize )
 			'sidebar',
 			array(
 					'type' => 'checkbox',
-					'label' => 'Show Sidebar:',
+					'label' => 'Show Sidebar',
 					'section' => 'trumansign_settings',
 			)
 	);
@@ -95,6 +104,56 @@ function trumansign_customize_register( $wp_customize )
 					),
 			)
 	);
+
+    $wp_customize->add_setting(
+        'refresh_slides',
+			array(
+                'default' => '1',
+            )
+    );
+
+    $wp_customize->add_control(
+        'refresh_slides',
+        array(
+            'type' => 'checkbox',
+            'label' => 'Auto Refresh Slides',
+            'section' => 'trumansign_settings',
+        )
+    );
+
+    $wp_customize->add_setting(
+        'refresh_sidebar',
+        array(
+            'default' => '1',
+        )
+    );
+
+    $wp_customize->add_control(
+        'refresh_sidebar',
+        array(
+            'type' => 'checkbox',
+            'label' => 'Auto Refresh Sidebar',
+            'section' => 'trumansign_settings',
+        )
+    );
+    $wp_customize->add_setting(
+        'refresh_footer',
+        array(
+            'default' => '1',
+        )
+    );
+
+    $wp_customize->add_control(
+        'refresh_footer',
+        array(
+            'type' => 'checkbox',
+            'label' => 'Auto Refresh Footer',
+            'section' => 'trumansign_settings',
+        )
+    );
+
+
+
 
     $colors = array(
         array('name' => 'sidebar_background_color',
@@ -254,7 +313,9 @@ function trumansign_metaboxes()
 function trumansign_save_details()
 {
     global $post;
-
+    if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) {
+        return $post_id;
+    }
     update_post_meta($post->ID, "bgcolor", $_POST["bgcolor"]);
     update_post_meta($post->ID, "textcolor", $_POST["textcolor"]);
     if ($_POST["hidetitle"] == "1") {
