@@ -2,7 +2,8 @@
 echo("</div>");
 if ( get_theme_mod( 'sidebar' ) == '1') {
     if ( get_theme_mod( 'sidebar_align' ) == 'right') {
-        echo('<div class="col-md-4 last sidebar">');
+        $sidebarwidth = get_theme_mod( 'sidebar_width' );
+        echo('<div class="col-md-'.$sidebarwidth.' last sidebar">');
         dynamic_sidebar( 'home-right' );
         echo('</div>');
     }

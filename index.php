@@ -6,6 +6,8 @@
 
 			<?php get_template_part( "slides" ); ?>
 		</div>
-
+		<?php if ( get_theme_mod( 'indicators' ) == '1') { ?>
+			<ol class="carousel-indicators"></ol>
+		<?php } ?>
 	</div>
 <?php get_footer(); ?>

@@ -41,9 +41,9 @@ function trumansign_scripts()
     wp_localize_script('theme-scripts', 'ajax_object',
         array(
             'ajax_url' => admin_url('admin-ajax.php'),
-            'refresh_slides' => get_theme_mod('refresh_slides'),
-            'refresh_sidebar' => get_theme_mod('refresh_sidebar'),
-            'refresh_footer' => get_theme_mod('refresh_footer')
+            'refresh_slides' => get_theme_mod('refresh_slides', 1),
+            'refresh_sidebar' => get_theme_mod('refresh_sidebar', 1),
+            'refresh_footer' => get_theme_mod('refresh_footer', 1)
         )
     );
 }
@@ -152,6 +152,21 @@ function trumansign_customize_register( $wp_customize )
         )
     );
 
+    $wp_customize->add_setting(
+        'indicators',
+        array(
+            'default' => '0',
+        )
+    );
+
+    $wp_customize->add_control(
+        'indicators',
+        array(
+            'type' => 'checkbox',
+            'label' => 'Show Indicators',
+            'section' => 'trumansign_settings',
+        )
+    );
 
 
 
@@ -235,6 +250,30 @@ function trumansign_customize_register( $wp_customize )
             'type' => 'checkbox',
             'label' => 'Use Slide Effect:',
             'section' => 'trumansign_settings',
+        )
+    );
+
+    $wp_customize->add_setting(
+        'sidebar_width',
+        array(
+            'default' => '4',
+        )
+    );
+
+    $wp_customize->add_control(
+        'sidebar_width',
+        array(
+            'type' => 'select',
+            'label' => 'Sidebar Width:',
+            'section' => 'trumansign_settings',
+            'choices' => array(
+                '1' => '1/12',
+                '2' => '1/6',
+                '3' => '1/4',
+                '4' => '1/3',
+                '5' => '5/12',
+                '6' => '1/2'
+            ),
         )
     );
 }

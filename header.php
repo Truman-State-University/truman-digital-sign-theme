@@ -44,15 +44,17 @@
 <?php
 echo('<div class="row row-no-padding">');
 	if ( get_theme_mod( 'sidebar' ) == '1') {
+		$sidebarwidth = get_theme_mod( 'sidebar_width' );
+		$contentwidth = 12 - $sidebarwidth;
 		if ( get_theme_mod( 'sidebar_align' ) == 'right') {
-			echo('<div class="col-md-8 col-sm-8 first">');
+			echo('<div class="col-md-'.$contentwidth.' col-sm-'.$contentwidth.' first">');
 		} else {
 			if ( get_theme_mod( 'sidebar_align' ) == 'left') {
-				echo('<div class="col-md-4 col-sm-4 first sidebar">');
+				echo('<div class="col-md-'.$sidebarwidth.' col-sm-'.$sidebarwidth.' first sidebar">');
 				dynamic_sidebar( 'home-right' );
 				echo('</div>');
 			}
-			echo('<div class="col-md-8 last">');
+			echo('<div class="col-md-'.$contentwidth.' last">');
 		}
 	} else {
 		echo('<div class="col-md-12">');

@@ -2,10 +2,10 @@
 /*
 Theme Name: Truman Digital Sign Theme
 Theme URI:
-Author: Greg Marshall
+Author: Truman State University
 Author URI:
 Description: Bootstrap Based Digital Sign
-Version: 0.1
+Version: 1.0
 
  */
 @media (min-width: 600px) {
@@ -320,4 +320,11 @@ tr.forecast {
     -moz-transform: translateX(-50%) translateY(-50%);
     -webkit-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
+}
+.carousel-indicators li {
+    margin: 5px;
+}
+.carousel-indicators li.active {
+    margin: 4px;
+
 }
