@@ -12,7 +12,8 @@ jQuery( window).ready( function(){
         t = setTimeout("jQuery('#slide-carousel').carousel('next');", start);
     }
     startVideo();
-
+    sidebarscripts = jQuery('.sidebar script');
+    footerscripts = jQuery('#footer script');
 
     jQuery('#slide-carousel').bind('slide.bs.carousel', function (e) {
         clearTimeout(t);
@@ -49,20 +50,17 @@ function updateContent(){
     }
     if (ajax_object.refresh_footer == '1') {
         jQuery("#footer").load(ajax_object.ajax_url + '?action=get_ajax_sidebar&sidebar=footer', function () {
-            if (jQuery('#Date').html() == "") {
-                // Create two variable with the names of the months and days in an array
-                var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
-                var dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
-                var newDate = new Date();
-                // Extract the current date from Date object
-                newDate.setDate(newDate.getDate());
-                jQuery('#Date').html(dayNames[newDate.getDay()] + ", " + newDate.getDate() + ' ' + monthNames[newDate.getMonth()] + ' ' + newDate.getFullYear());
-            }
+            jQuery.each( sidebarscripts, function( key, value ) {
+                jQuery.getScript(value.src);
+            });
         });
     }
     if (ajax_object.refresh_sidebar == '1') {
-        jQuery(".sidebar").load(ajax_object.ajax_url + '?action=get_ajax_sidebar&sidebar=home-right');
+        jQuery(".sidebar").load(ajax_object.ajax_url + '?action=get_ajax_sidebar&sidebar=home-right', function () {
+            jQuery.each( sidebarscripts, function( key, value ) {
+                jQuery.getScript(value.src);
+            });
+        });
     }
 }
 
