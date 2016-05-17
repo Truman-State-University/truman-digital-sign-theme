@@ -349,23 +349,31 @@ function trumansign_metaboxes()
     <?php
 }
 
-function trumansign_save_details()
+function trumansign_save_details($post_id)
 {
     global $post;
+    $slug = 'book';
+    if ( 'post' != $post->post_type ) {
+        return;
+    }
+    if ( wp_is_post_revision( $post_id ) ) {
+        return;
+    }
+
     if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) {
         return $post_id;
     }
-    update_post_meta($post->ID, "bgcolor", $_POST["bgcolor"]);
-    update_post_meta($post->ID, "textcolor", $_POST["textcolor"]);
+    update_post_meta($post_id, "bgcolor", $_POST["bgcolor"]);
+    update_post_meta($post_id, "textcolor", $_POST["textcolor"]);
     if ($_POST["hidetitle"] == "1") {
-        update_post_meta($post->ID, "hidetitle", "1");
+        update_post_meta($post_id, "hidetitle", "1");
     } else {
-        delete_post_meta($post->ID, "hidetitle");
+        delete_post_meta($post_id, "hidetitle");
     }
-    update_post_meta($post->ID, "slideimage", $_POST["slideimage"]);
-    update_post_meta($post->ID, "slidevideo", $_POST["slidevideo"]);
-    update_post_meta($post->ID, "slideimagesize", $_POST["slideimagesize"]);
-    update_post_meta($post->ID, "slideduration", $_POST["slideduration"]);
+    update_post_meta($post_id, "slideimage", $_POST["slideimage"]);
+    update_post_meta($post_id, "slidevideo", $_POST["slidevideo"]);
+    update_post_meta($post_id, "slideimagesize", $_POST["slideimagesize"]);
+    update_post_meta($post_id, "slideduration", $_POST["slideduration"]);
 
 }
 
