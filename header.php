@@ -44,7 +44,7 @@
 <?php
 echo('<div class="row row-no-padding">');
 	if ( get_theme_mod( 'sidebar' ) == '1') {
-		$sidebarwidth = get_theme_mod( 'sidebar_width' );
+		$sidebarwidth = get_theme_mod( 'sidebar_width', 4 );
 		$contentwidth = 12 - $sidebarwidth;
 		if ( get_theme_mod( 'sidebar_align' ) == 'right') {
 			echo('<div class="col-md-'.$contentwidth.' col-sm-'.$contentwidth.' first">');
