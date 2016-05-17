@@ -2,6 +2,12 @@
  * Created by gmarsh on 11/23/15.
  */
 var t;
+
+jQuery.ajaxSetup ({
+    // Disable caching of AJAX responses
+    cache: false
+});
+
 jQuery( window).ready( function(){
     setheights();
     updateIndicators();
