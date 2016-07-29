@@ -1,3 +1,7 @@
+// Create two variable with the names of the months and days in an array
+var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec" ];
+var dayNames= ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+
 function updateClock() {
     var currentTime = new Date();
     var currentHours = currentTime.getHours ( );

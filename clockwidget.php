@@ -13,8 +13,8 @@ class Truman_Sign_Clock_Widget extends WP_Widget
     {
         parent::__construct(
             'truman_sign_clock_widget',
-            __('Clock Widget', 'truman_digital_sign'),
-            array('description' => __('Shows a clock', 'truman_digital_sign'),)
+            __('Clock Widget', 'truman-digital-sign-theme'),
+            array('description' => __('Shows a clock with time and date', 'truman-digital-sign-theme'),)
         );
     }
 
@@ -37,7 +37,5 @@ class Truman_Sign_Clock_Widget extends WP_Widget
          );
         echo $args['after_widget'];
     }
-
-
 
 } // class Truman_Sign_Clock_Widget

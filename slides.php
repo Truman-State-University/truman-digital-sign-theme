@@ -32,11 +32,12 @@
             <div class="textcontent">
                 <?php if ($hidetitle != "1") {
                     echo("<h1>" . get_the_title() ."</h1>");
-                } ?>					<?php the_content();?>
+                } ?>
+                <?php the_content();?>
                 <?php echo $the_query->current_post;?>
             </div>
         </div>
 
     </div>
 <?php endwhile; else: ?>
-<?php endif; ?>
+<?php endif;

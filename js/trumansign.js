@@ -2,9 +2,6 @@
  * Created by gmarsh on 11/23/15.
  */
 var t;
-// Create two variable with the names of the months and days in an array
-var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec" ];
-var dayNames= ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
 
 jQuery.ajaxSetup ({
     // Disable caching of AJAX responses
