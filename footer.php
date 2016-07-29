@@ -14,7 +14,7 @@ echo('</div>');
     <?php dynamic_sidebar( 'footer' ); ?>
 
 </div>
-<?php wp_footer(); /* this is used by many Wordpress features and plugins to work proporly */ ?>
+<?php wp_footer(); ?>
 </div>
 </body>
 </html>

@@ -1,6 +1,9 @@
 <?php
-// Home Right Widget
-// Location: homepage to the right of narrow slider
+
+require_once('clockwidget.php');
+
+// Sidebar Widgets
+// Location: left or right side
 register_sidebar(array('name'=>'home-right',
 		'before_widget' => '<div class="widget-area widget-sidebar">',
 		'after_widget' => '</div>',
@@ -8,6 +11,7 @@ register_sidebar(array('name'=>'home-right',
 		'after_title' => '</h4>',
 ));
 
+// Footer Widgets
 register_sidebar(array('name'=>'footer',
     'before_widget' => '<div class="widget-area widget-footer col-lg-4 col-md-4 col-sm-4">',
     'after_widget' => '</div>',
@@ -30,12 +34,14 @@ add_action('wp_ajax_get_ajax_sidebar', 'trumansign_ajaxsidebar');
 add_action('wp_ajax_nopriv_get_ajax_sidebar', 'trumansign_ajaxsidebar');
 add_action('pre_get_posts','change_num_posts');
 add_filter('widget_text', 'do_shortcode');
+add_action('widgets_init', 'register_truman_sign_clock_widget');
 
 
 function trumansign_scripts()
 {
     wp_enqueue_style('bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css');
     wp_enqueue_style('theme-style', get_stylesheet_uri());
+    wp_enqueue_style('josefin', 'https://fonts.googleapis.com/css?family=Josefin+Sans:400,700');
     wp_enqueue_script('bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', array('jquery'), '3.3.4', true);
     wp_enqueue_script('theme-scripts', get_template_directory_uri() . '/js/trumansign.js', array('jquery'));
     wp_localize_script('theme-scripts', 'ajax_object',
@@ -287,8 +293,8 @@ function trumansign_custom_css_output() {
     echo 'background-size: ' . get_theme_mod( 'sidebar_background_image_size', '' ) . ';';
     echo 'background-repeat: no-repeat;';
     echo '}';
-    echo '#footer {background-color: '. get_theme_mod( 'footer_background_color', '' ) . ';}';
-    echo '#footer a, .clock, .clock ul li {color: '. get_theme_mod( 'footer_text_color', '' ) . '; }';
+    echo '#footer {background-color: '. get_theme_mod( 'footer_background_color', '' ) . '; color: '.get_theme_mod( 'footer_text_color', '#fff' ).'}';
+    echo '#footer a, .clock {color: '. get_theme_mod( 'footer_text_color', '#fff' ) . '; }';
     echo '</style>';
 }
 
@@ -412,5 +418,9 @@ function change_num_posts($qry) {
         $qry->set('posts_per_page','-1');
     }
 
+}
+
+function register_truman_sign_clock_widget() {
+    register_widget( 'Truman_Sign_Clock_Widget' );
 }
 ?>
