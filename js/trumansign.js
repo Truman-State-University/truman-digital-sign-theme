@@ -21,15 +21,12 @@ jQuery( window).ready( function(){
     sidebarscripts = jQuery('.sidebar script');
     footerscripts = jQuery('#footer script');
 
-    jQuery('#slide-carousel').bind('slide.bs.carousel', function (e) {
+    jQuery('#slide-carousel').bind('slid.bs.carousel', function (e) {
         clearTimeout(t);
         if (currentvideo) {
             currentvideo.pause();
             currentvideo.currentTime = 0;
         }
-    })
-
-    jQuery('#slide-carousel').on('slid.bs.carousel', function () {
         var duration = jQuery(this).find('.active').attr('data-interval');
         t = setTimeout("jQuery('#slide-carousel').carousel('next');", duration);
         startVideo();
