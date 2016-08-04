@@ -20,6 +20,8 @@ class TrumanDigitalSign
         add_action('wp_ajax_nopriv_get_ajax_content', array($this, 'trumansign_ajaxcontent'));
         add_action('wp_ajax_get_ajax_sidebar', array($this, 'trumansign_ajaxsidebar'));
         add_action('wp_ajax_nopriv_get_ajax_sidebar', array($this, 'trumansign_ajaxsidebar'));
+        add_action('wp_ajax_get_theme_mods', array($this, 'trumansign_ajaxthememods'));
+        add_action('wp_ajax_nopriv_get_theme_mods', array($this, 'trumansign_ajaxthememods'));
         add_action('pre_get_posts', array($this, 'change_num_posts'));
         add_filter('widget_text', 'do_shortcode');
         add_action('widgets_init', array($this, 'register_truman_sign_clock_widget'));
@@ -54,7 +56,8 @@ class TrumanDigitalSign
                 'ajax_url' => admin_url('admin-ajax.php'),
                 'refresh_slides' => get_theme_mod('refresh_slides', 1),
                 'refresh_sidebar' => get_theme_mod('refresh_sidebar', 1),
-                'refresh_footer' => get_theme_mod('refresh_footer', 1)
+                'refresh_footer' => get_theme_mod('refresh_footer', 1),
+                'theme_mods' => md5(serialize(get_theme_mods()))
             )
         );
     }
@@ -462,6 +465,11 @@ class TrumanDigitalSign
         $sidebar = ob_get_contents();
         ob_end_clean();
         echo preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $sidebar);
+        die();
+    }
+
+    public function trumansign_ajaxthememods() {
+        echo md5(serialize(get_theme_mods()));
         die();
     }
 

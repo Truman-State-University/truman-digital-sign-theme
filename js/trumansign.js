@@ -48,6 +48,14 @@ function setheights() {
 }
 
 function updateContent(){
+    jQuery.post( ajax_object.ajax_url + '?action=get_theme_mods', function( data ) {
+        console.log(data);
+        if (data != ajax_object.theme_mods) {
+            location.reload(true);
+            return;
+        }
+
+    });
     if (ajax_object.refresh_slides == '1') {
         jQuery(".carousel-inner").load(ajax_object.ajax_url + '?action=get_ajax_content', function () {
             setheights();
@@ -56,14 +64,14 @@ function updateContent(){
     }
     if (ajax_object.refresh_footer == '1') {
         jQuery("#footer").load(ajax_object.ajax_url + '?action=get_ajax_sidebar&sidebar=footer', function () {
-            jQuery.each( footerscripts, function( key, value ) {
+            jQuery.each(footerscripts, function (key, value) {
                 jQuery.getScript(value.src);
             });
         });
     }
     if (ajax_object.refresh_sidebar == '1') {
         jQuery(".sidebar").load(ajax_object.ajax_url + '?action=get_ajax_sidebar&sidebar=home-right', function () {
-            jQuery.each( sidebarscripts, function( key, value ) {
+            jQuery.each(sidebarscripts, function (key, value) {
                 jQuery.getScript(value.src);
             });
         });
