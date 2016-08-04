@@ -336,7 +336,7 @@ class TrumanDigitalSign
         add_meta_box(
             "slidecolor",
             "Slide Settings",
-            "trumansign_metaboxes",
+            array($this, "trumansign_metaboxes"),
             "post",
             "normal",
             "high"
