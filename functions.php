@@ -16,12 +16,8 @@ class TrumanDigitalSign
         add_action('customize_register', array($this, 'trumansign_customize_register'));
         add_action('after_setup_theme', array($this, 'remove_admin_bar'));
         add_action('wp_head', array($this, 'trumansign_custom_css_output'));
-        add_action('wp_ajax_get_ajax_content', array($this, 'trumansign_ajaxcontent'));
-        add_action('wp_ajax_nopriv_get_ajax_content', array($this, 'trumansign_ajaxcontent'));
-        add_action('wp_ajax_get_ajax_sidebar', array($this, 'trumansign_ajaxsidebar'));
-        add_action('wp_ajax_nopriv_get_ajax_sidebar', array($this, 'trumansign_ajaxsidebar'));
-        add_action('wp_ajax_get_theme_mods', array($this, 'trumansign_ajaxthememods'));
-        add_action('wp_ajax_nopriv_get_theme_mods', array($this, 'trumansign_ajaxthememods'));
+        add_action('wp_ajax_get_content_hash', array($this, 'trumansign_ajaxcontenthash'));
+        add_action('wp_ajax_nopriv_get_content_hash', array($this, 'trumansign_ajaxcontenthash'));
         add_action('pre_get_posts', array($this, 'change_num_posts'));
         add_filter('widget_text', 'do_shortcode');
         add_action('widgets_init', array($this, 'register_truman_sign_clock_widget'));
@@ -54,10 +50,7 @@ class TrumanDigitalSign
         wp_localize_script('theme-scripts', 'ajax_object',
             array(
                 'ajax_url' => admin_url('admin-ajax.php'),
-                'refresh_slides' => get_theme_mod('refresh_slides', 1),
-                'refresh_sidebar' => get_theme_mod('refresh_sidebar', 1),
-                'refresh_footer' => get_theme_mod('refresh_footer', 1),
-                'theme_mods' => md5(serialize(get_theme_mods()))
+                'content_hash' => $this->get_content_hash()
             )
         );
     }
@@ -132,52 +125,6 @@ class TrumanDigitalSign
             )
         );
 
-        $wp_customize->add_setting(
-            'refresh_slides',
-            array(
-                'default' => '1',
-            )
-        );
-
-        $wp_customize->add_control(
-            'refresh_slides',
-            array(
-                'type' => 'checkbox',
-                'label' => 'Auto Refresh Slides',
-                'section' => 'trumansign_settings',
-            )
-        );
-
-        $wp_customize->add_setting(
-            'refresh_sidebar',
-            array(
-                'default' => '1',
-            )
-        );
-
-        $wp_customize->add_control(
-            'refresh_sidebar',
-            array(
-                'type' => 'checkbox',
-                'label' => 'Auto Refresh Sidebar',
-                'section' => 'trumansign_settings',
-            )
-        );
-        $wp_customize->add_setting(
-            'refresh_footer',
-            array(
-                'default' => '1',
-            )
-        );
-
-        $wp_customize->add_control(
-            'refresh_footer',
-            array(
-                'type' => 'checkbox',
-                'label' => 'Auto Refresh Footer',
-                'section' => 'trumansign_settings',
-            )
-        );
 
         $wp_customize->add_setting(
             'indicators',
@@ -442,35 +389,33 @@ class TrumanDigitalSign
         show_admin_bar(false);
     }
 
-    public function trumansign_ajaxcontent() {
+    public function trumansign_ajaxcontenthash() {
+        echo $this->get_content_hash();
+        die();
+    }
+
+    public function get_content_hash() {
+        $content = "";
+        //get slides
         define('WP_USE_THEMES', false);
         global $wp_query;
         query_posts('post_status=publish&posts_per_page=-1');
         ob_start();
         get_template_part('slides');
-        $content = ob_get_contents();
+        $content .= ob_get_contents();
         ob_end_clean();
-        echo preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $content);
-        die();
-    }
-
-    public function trumansign_ajaxsidebar() {
-        $sidebar = $_GET['sidebar'];
+        //get sidebar
         ob_start();
-        if ($sidebar == 'footer') {
-            dynamic_sidebar('footer');
-        } else {
-            dynamic_sidebar('home-right');
-        }
-        $sidebar = ob_get_contents();
+        dynamic_sidebar('home-right');
+        $content .= ob_get_contents();
         ob_end_clean();
-        echo preg_replace('/<script\b[^>]*>(.*?)<\/script>/is', "", $sidebar);
-        die();
-    }
-
-    public function trumansign_ajaxthememods() {
-        echo md5(serialize(get_theme_mods()));
-        die();
+        //get footer
+        ob_start();
+        dynamic_sidebar('footer');
+        $content .= ob_get_contents();
+        ob_end_clean();
+        $content .= serialize(get_theme_mods());
+        return md5($content);
     }
 
     public function change_num_posts($qry) {

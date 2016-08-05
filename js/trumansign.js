@@ -2,6 +2,7 @@
  * Created by gmarsh on 11/23/15.
  */
 var t;
+var loadtime = new Date().getTime();
 
 jQuery.ajaxSetup ({
     // Disable caching of AJAX responses
@@ -11,17 +12,18 @@ jQuery.ajaxSetup ({
 jQuery( window).ready( function(){
     setheights();
     updateIndicators();
-    setInterval(updateContent,300000);
 
     var start = jQuery('#slide-carousel').find('.active').attr('data-interval');
     if(typeof t == 'undefined'){
         t = setTimeout("jQuery('#slide-carousel').carousel('next');", start);
     }
     startVideo();
-    sidebarscripts = jQuery('.sidebar script');
-    footerscripts = jQuery('#footer script');
 
     jQuery('#slide-carousel').bind('slid.bs.carousel', function (e) {
+        if (jQuery("#slide-carousel .active").index() == 0) {
+            checkForRefresh();
+        }
+
         clearTimeout(t);
         if (currentvideo) {
             currentvideo.pause();
@@ -34,6 +36,20 @@ jQuery( window).ready( function(){
 
 } );
 
+function checkForRefresh() {
+    var now = new Date().getTime();
+    if (now - loadtime > 300000) {
+        jQuery.post( ajax_object.ajax_url + '?action=get_content_hash', function( data ) {
+            console.log(data);
+            if (data != ajax_object.content_hash) {
+                location.reload(true);
+                return;
+            }
+
+        });
+    }
+}
+
 
 jQuery( window ).resize( setheights );
 
@@ -44,36 +60,6 @@ function setheights() {
     jQuery('#footer').height(winheight * .15);
 }
 
-function updateContent(){
-    jQuery.post( ajax_object.ajax_url + '?action=get_theme_mods', function( data ) {
-        console.log(data);
-        if (data != ajax_object.theme_mods) {
-            location.reload(true);
-            return;
-        }
-
-    });
-    if (ajax_object.refresh_slides == '1') {
-        jQuery(".carousel-inner").load(ajax_object.ajax_url + '?action=get_ajax_content', function () {
-            setheights();
-            updateIndicators();
-        });
-    }
-    if (ajax_object.refresh_footer == '1') {
-        jQuery("#footer").load(ajax_object.ajax_url + '?action=get_ajax_sidebar&sidebar=footer', function () {
-            jQuery.each(footerscripts, function (key, value) {
-                jQuery.getScript(value.src);
-            });
-        });
-    }
-    if (ajax_object.refresh_sidebar == '1') {
-        jQuery(".sidebar").load(ajax_object.ajax_url + '?action=get_ajax_sidebar&sidebar=home-right', function () {
-            jQuery.each(sidebarscripts, function (key, value) {
-                jQuery.getScript(value.src);
-            });
-        });
-    }
-}
 
 function updateIndicators() {
     var bootCarousel = jQuery(".carousel");
