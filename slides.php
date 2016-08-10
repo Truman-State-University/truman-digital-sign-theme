@@ -4,6 +4,7 @@
     $bgcolor = $custom["bgcolor"][0];
     $textcolor = $custom["textcolor"][0];
     $hidetitle = $custom["hidetitle"][0];
+    $fittext = $custom["fittext"][0];
     $slideimage = $custom["slideimage"][0];
     $slideimagesize = $custom["slideimagesize"][0];
     $slideduration = $custom["slideduration"][0];
@@ -13,6 +14,11 @@
         $stylestr = " background-image: url('{$slideimage}'); background-size: {$slideimagesize}; background-repeat: no-repeat";
     } else {
         $stylestr = "";
+    }
+    if ($fittext == "1") {
+        $fittextstr = " fittext";
+    } else {
+        $fittextstr = "";
     }
     if ($slideduration == "") {
         $slideduration = 8;
@@ -29,7 +35,7 @@
                 </video>
                 <?php
             } ?>
-            <div class="textcontent">
+            <div class="textcontent<?php echo $fittextstr; ?>">
                 <?php if ($hidetitle != "1") {
                     echo("<h1>" . get_the_title() ."</h1>");
                 } ?>

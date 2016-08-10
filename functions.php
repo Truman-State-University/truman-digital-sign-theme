@@ -47,6 +47,7 @@ class TrumanDigitalSign
         wp_enqueue_style('josefin', 'https://fonts.googleapis.com/css?family=Josefin+Sans:400,700');
         wp_enqueue_script('bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', array('jquery'), '3.3.4', true);
         wp_enqueue_script('theme-scripts', get_template_directory_uri() . '/js/trumansign.js', array('jquery'));
+        wp_enqueue_script('textfit', get_template_directory_uri() . '/js/textFit.js');
         wp_localize_script('theme-scripts', 'ajax_object',
             array(
                 'ajax_url' => admin_url('admin-ajax.php'),
@@ -297,6 +298,7 @@ class TrumanDigitalSign
         $bgcolor = $custom["bgcolor"][0];
         $textcolor = $custom["textcolor"][0];
         $hidetitle = $custom["hidetitle"][0];
+        $fittext = $custom["fittext"][0];
         $slideimage = $custom["slideimage"][0];
         $slideimagesize = $custom["slideimagesize"][0];
         $slidevideo = $custom["slidevideo"][0];
@@ -342,6 +344,11 @@ class TrumanDigitalSign
             <input type="checkbox" id="hidetitle" name="hidetitle" value="1" <?php if ($hidetitle == 1) {
                 echo "checked=\"checked\"";
             }; ?>" /></p>
+        <p><label for="fittext">Scale Text Automatically to Fit: </label>
+            <input type="checkbox" id="fittext" name="fittext" value="1" <?php if ($fittext == 1) {
+                echo "checked=\"checked\"";
+            }; ?>" /></p>
+
         <p><label for="slideduration">Slide Duration: </label>
             <select name="slideduration" id="slideduration">
                 <?php for ($i = 1; $i <= 20; $i++) {
@@ -378,6 +385,11 @@ class TrumanDigitalSign
         } else {
             delete_post_meta($post_id, "hidetitle");
         }
+        if ($_POST["fittext"] == "1") {
+            update_post_meta($post_id, "fittext", "1");
+        } else {
+            delete_post_meta($post_id, "fittext");
+        }
         update_post_meta($post_id, "slideimage", $_POST["slideimage"]);
         update_post_meta($post_id, "slidevideo", $_POST["slidevideo"]);
         update_post_meta($post_id, "slideimagesize", $_POST["slideimagesize"]);
@@ -395,7 +407,8 @@ class TrumanDigitalSign
     }
 
     public function get_content_hash() {
-        $content = "";
+        $my_theme = wp_get_theme();
+        $content = $my_theme->get( 'Version' );
         //get slides
         define('WP_USE_THEMES', false);
         global $wp_query;
