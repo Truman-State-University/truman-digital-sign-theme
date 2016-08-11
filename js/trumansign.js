@@ -8,7 +8,9 @@ jQuery.ajaxSetup ({
     // Disable caching of AJAX responses
     cache: false
 });
-
+jQuery( window ).load( function() {
+    applyTextFit();
+});
 jQuery( window).ready( function(){
     setheights();
     updateIndicators();
@@ -17,7 +19,6 @@ jQuery( window).ready( function(){
     if(typeof t == 'undefined'){
         t = setTimeout("jQuery('#slide-carousel').carousel('next');", start);
     }
-    applyTextFit();
     startVideo();
 
     jQuery('#slide-carousel').bind('slid.bs.carousel', function (e) {
@@ -91,7 +92,7 @@ function applyTextFit() {
     if (jQuery('#slide-carousel .active').find('.fittext').length > 0) {
         currentslide = jQuery('#slide-carousel .active').find('.fittext')[0];
         textFit(currentslide);
-        jQuery(currentslide).removeClass('textfit')
+        jQuery(currentslide).removeClass('fittext')
     }
 }
 
