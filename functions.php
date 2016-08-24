@@ -314,6 +314,7 @@ class TrumanDigitalSign
                    style="height: auto;" size="70">
             <input type="button" class="button custom_media" name="slideimage_button" id="slideimage_button"
                    value="Upload/Browse"/>
+            <div id="slideimagedimensions" style="margin-left: 125px"></div>
         </p>
         <p><label for="slideimagesize">Background Image Size: </label>
             <select name="slideimagesize" id="slideimagesize">

@@ -13,6 +13,9 @@ jQuery(document).ready(function($){
         wp.media.editor.send.attachment = function(props, attachment){
             if ( _custom_media ) {
                 jQuery("#"+id).val(attachment.url);
+                if (id == 'slideimage') {
+                    showDimensions(attachment.url);
+                }
             } else {
                 return _orig_send_attachment.apply( this, [props, attachment] );
             };
@@ -29,4 +32,16 @@ jQuery(document).ready(function($){
     jQuery('#bgcolor').minicolors();
     jQuery('#textcolor').minicolors();
 
+    if (jQuery('#slideimage').val() != '') {
+        showDimensions(jQuery('#slideimage').val());
+    }
 });
+
+function showDimensions(url){
+    jQuery("<img/>",{
+        load : function(){
+            jQuery("#slideimagedimensions").html('Image Dimensions: ' + this.width+' x '+this.height);
+        },
+        src  : url
+    });
+}
