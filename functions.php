@@ -330,6 +330,14 @@ class TrumanDigitalSign
                 }; ?>>Stretch
                 </option>
             </select>
+            For an exact fit, image should be
+            <?php if (get_theme_mod( 'sidebar' ) == 0) {
+                echo '1920';
+            } else {
+                $sidebarwidth = get_theme_mod( 'sidebar_width', 4 );
+                echo (1920 * (12-$sidebarwidth)/12);
+            }
+            ?> x 918 based on your current <a href="<?php echo admin_url( 'customize.php?autofocus[section]=trumansign_settings'); ?>">sidebar settings</a>.
         </p>
         <p><label for="slidevideo">Slide Video (Upload MP4 file):</label>
             <input type="text" id="slidevideo" name="slidevideo" value="<?php echo $slidevideo; ?>"
