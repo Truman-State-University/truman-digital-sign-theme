@@ -35,7 +35,7 @@ class TrumanDigitalSign
 
         // Footer Widgets
         register_sidebar(array('name' => 'footer',
-            'before_widget' => '<div class="widget-area widget-footer col-lg-4 col-md-4 col-sm-4">',
+            'before_widget' => '<div class="widget-area widget-footer col-lg-4 col-md-4 col-sm-4 col-xs-4">',
             'after_widget' => '</div>',
             'before_title' => '<h4>',
             'after_title' => '</h4>',
