@@ -21,15 +21,15 @@ echo('<div class="row row-no-padding">');
 		$sidebarwidth = get_theme_mod( 'sidebar_width', 4 );
 		$contentwidth = 12 - $sidebarwidth;
 		if ( get_theme_mod( 'sidebar_align' ) == 'right') {
-			echo('<div class="col-md-'.$contentwidth.' col-sm-'.$contentwidth.' first">');
+			echo('<div class="col-md-'.$contentwidth.' col-sm-'.$contentwidth.' col-xs-'.$contentwidth.' first">');
 		} else {
 			if ( get_theme_mod( 'sidebar_align' ) == 'left') {
-				echo('<div class="col-md-'.$sidebarwidth.' col-sm-'.$sidebarwidth.' first sidebar">');
+				echo('<div class="col-md-'.$sidebarwidth.' col-sm-'.$sidebarwidth.' col-xs-'.$sidebarwidth.' first sidebar">');
 				dynamic_sidebar( 'home-right' );
 				echo('</div>');
 			}
-			echo('<div class="col-md-'.$contentwidth.' last">');
+			echo('<div class="col-md-'.$contentwidth.' col-sm-'.$contentwidth.' col-xs-'.$contentwidth.' last">');
 		}
 	} else {
-		echo('<div class="col-md-12">');
+		echo('<div class="col-md-12 col-sm-12 col-xs-12">');
 	}
