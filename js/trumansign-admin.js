@@ -35,6 +35,10 @@ jQuery(document).ready(function($){
     if (jQuery('#slideimage').val() != '') {
         showDimensions(jQuery('#slideimage').val());
     }
+
+    if (jQuery('#preview')) {
+        jQuery('#preview').height(jQuery('#preview').width()*(9/16));
+    }
 });
 
 function showDimensions(url){

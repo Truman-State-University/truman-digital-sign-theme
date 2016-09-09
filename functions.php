@@ -281,14 +281,25 @@ class TrumanDigitalSign
 
 
     public function trumansign_meta_boxes() {
-        add_meta_box(
-            "slidecolor",
-            "Slide Settings",
-            array($this, "trumansign_metaboxes"),
-            "post",
-            "normal",
-            "high"
-        );
+            add_meta_box(
+                "slidecolor",
+                "Slide Settings",
+                array($this, "trumansign_metaboxes"),
+                "post",
+                "normal",
+                "high"
+            );
+        global $current_screen;
+        if ($current_screen->action != 'add') {
+            add_meta_box(
+                "previewmeta",
+                "Preview",
+                array($this, "preview_meta_box"),
+                "post",
+                "normal",
+                "high"
+            );
+        }
     }
 
 
@@ -370,10 +381,15 @@ class TrumanDigitalSign
                 ?>
             </select> Seconds
         </p>
-
         <?php
     }
 
+    public function preview_meta_box() {
+        global $post;
+        ?>
+        <iframe id="preview" src="<?php echo get_the_permalink($post)?>?preview=true" style="width: 100%"></iframe>
+        <?php
+    }
     public function trumansign_save_details($post_id) {
         global $post;
         $slug = 'book';
