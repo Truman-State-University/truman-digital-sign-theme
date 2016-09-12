@@ -259,12 +259,12 @@ tr.forecast {
     background: rgba(255,255,255,.9);
 }
 .slidecontent .wp_wunderground img {
-    width: 8rem;
-    height: 8rem;
+    width: 16rem;
+    height: 16rem;
     max-width: 100%;
 }
 .wu-forecast-body {
-    font-size: 2rem;
+    font-size: 4rem;
 }
 .wu-forecast-wrapper .wu-cond-highlow .wu-cond-low {
     display: block;
