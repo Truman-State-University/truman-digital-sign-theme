@@ -275,7 +275,7 @@ tr.forecast {
 }
 .rssfeed a {
     text-decoration: none;
-    color: #fff;
+    color: inherit;
     font-size: 4rem;
 }
 
