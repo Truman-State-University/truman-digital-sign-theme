@@ -58,9 +58,11 @@ jQuery( window ).resize( setheights );
 
 function setheights() {
     winheight = jQuery(window).height();
-    jQuery('.slidecontent').height(winheight * .85  );
-    jQuery('.sidebar').height(winheight * .85);
-    jQuery('#footer').height(winheight * .15);
+    jQuery('.slidecontent').height(winheight * (100-ajax_object.footer_height)/100  );
+    jQuery('.sidebar').height(winheight * (100-ajax_object.footer_height)/100);
+    if (ajax_object.footer_height != 0) {
+        jQuery('#footer').height(winheight * (ajax_object.footer_height) / 100);
+    }
 }
 
 

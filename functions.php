@@ -42,15 +42,17 @@ class TrumanDigitalSign
         ));
     }
     public function trumansign_scripts() {
+        $my_theme = wp_get_theme();
         wp_enqueue_style('bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css');
-        wp_enqueue_style('theme-style', get_stylesheet_uri());
+        wp_enqueue_style('theme-style', get_stylesheet_uri(), null, $my_theme->get( 'Version' ));
         wp_enqueue_style('josefin', 'https://fonts.googleapis.com/css?family=Josefin+Sans:400,700');
         wp_enqueue_script('bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', array('jquery'), '3.3.4', true);
-        wp_enqueue_script('theme-scripts', get_template_directory_uri() . '/js/trumansign.js', array('jquery'));
-        wp_enqueue_script('textfit', get_template_directory_uri() . '/js/textFit.js');
+        wp_enqueue_script('theme-scripts', get_template_directory_uri() . '/js/trumansign.js', array('jquery'), $my_theme->get( 'Version' ));
+        wp_enqueue_script('textfit', get_template_directory_uri() . '/js/textFit.js', '2.3.1');
         wp_localize_script('theme-scripts', 'ajax_object',
             array(
                 'ajax_url' => admin_url('admin-ajax.php'),
+                'footer_height' => get_theme_mod('footer_height', 15),
                 'content_hash' => $this->get_content_hash()
             )
         );
@@ -263,7 +265,26 @@ class TrumanDigitalSign
                 ),
             )
         );
+        $wp_customize->add_setting(
+            'footer_height',
+            array(
+                'default' => 15,
+                'sanitize_callback' => array($this, 'sanitize_percentage'),
+            )
+        );
+
+        $wp_customize->add_control(
+            'footer_height',
+            array(
+                'type' => 'number',
+                'label' => 'Footer Height (%)',
+                'section' => 'trumansign_settings',
+            )
+        );
+
     }
+
+
 
     public function trumansign_custom_css_output() {
         echo '<style type="text/css" id="custom-theme-css">';
@@ -274,7 +295,7 @@ class TrumanDigitalSign
         echo 'background-size: ' . get_theme_mod('sidebar_background_image_size', '') . ';';
         echo 'background-repeat: no-repeat;';
         echo '}';
-        echo '#footer {background-color: ' . get_theme_mod('footer_background_color', '') . '; color: ' . get_theme_mod('footer_text_color', '#fff') . '}';
+        echo '#footer {background-color: ' . get_theme_mod('footer_background_color', '') . '; color: ' . get_theme_mod('footer_text_color', '#fff') . '; height: ' . get_theme_mod('footer_height', 15) . '%;}';
         echo '#footer a, .clock {color: ' . get_theme_mod('footer_text_color', '#fff') . '; }';
         echo '</style>';
     }
@@ -464,5 +485,17 @@ class TrumanDigitalSign
 
     public function register_truman_sign_clock_widget() {
         register_widget('Truman_Sign_Clock_Widget');
+    }
+
+    public function sanitize_percentage( $input ) {
+            if ( !is_numeric($input) ) {
+                return 15;
+            }
+
+            if ( $input >= 0 && $input <= 100 ) {
+                return $input;
+            } else {
+                return 15;
+            }
     }
 }
