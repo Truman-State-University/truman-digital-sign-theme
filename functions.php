@@ -279,7 +279,13 @@ class TrumanDigitalSign
                 'type' => 'number',
                 'label' => 'Footer Height (%)',
                 'section' => 'trumansign_settings',
+                'input_attrs' => array(
+                    'min' => 0,
+                    'max' => 100,
+                    'step' => 1,
+                )
             )
+
         );
 
     }
@@ -370,7 +376,8 @@ class TrumanDigitalSign
                 $sidebarwidth = get_theme_mod( 'sidebar_width', 4 );
                 echo (1920 * (12-$sidebarwidth)/12);
             }
-            ?> x 918 based on your current <a href="<?php echo admin_url( 'customize.php?autofocus[section]=trumansign_settings'); ?>">sidebar settings</a>.
+            $footerheight = get_theme_mod( 'footer_height', 15 );
+            ?> x <?php echo (1080 * (100-$footerheight)/100); ?> based on your current <a href="<?php echo admin_url( 'customize.php?autofocus[section]=trumansign_settings'); ?>">footer and sidebar settings</a>.
         </p>
         <p><label for="slidevideo">Slide Video (Upload MP4 file):</label>
             <input type="text" id="slidevideo" name="slidevideo" value="<?php echo $slidevideo; ?>"
