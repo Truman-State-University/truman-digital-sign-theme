@@ -42,4 +42,4 @@ The Kiosk app will start and will show the browser full screen.
 *   Press Ctrl-A
 *   Log in with user admin and the admin password
 *   Click Save
-*   When the Kiosk launching screen displays, press Ctrl-Alt-S c
+*   When the Kiosk launching screen displays, press Ctrl-Alt-S
