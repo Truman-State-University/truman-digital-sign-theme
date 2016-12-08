@@ -53,6 +53,7 @@ class TrumanDigitalSign
             array(
                 'ajax_url' => admin_url('admin-ajax.php'),
                 'footer_height' => get_theme_mod('footer_height', 15),
+                'update_interval' => get_theme_mod('update_interval', 5)* MINUTE_IN_SECONDS * 1000,
                 'content_hash' => $this->get_content_hash()
             )
         );
@@ -286,6 +287,23 @@ class TrumanDigitalSign
                 )
             )
 
+        );
+
+        $wp_customize->add_setting(
+            'update_interval',
+            array(
+                'default' => 5,
+                'sanitize_callback' => 'absint',
+            )
+        );
+
+        $wp_customize->add_control(
+            'update_interval',
+            array(
+                'type' => 'number',
+                'label' => 'Check for Updates Every ___ Minutes',
+                'section' => 'trumansign_settings'
+            )
         );
 
     }

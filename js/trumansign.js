@@ -41,12 +41,13 @@ jQuery( window).ready( function(){
 
 function checkForRefresh() {
     var now = new Date().getTime();
-    if (now - loadtime > 300000) {
-        jQuery.post( ajax_object.ajax_url + '?action=get_content_hash', function( data ) {
-            console.log(data);
-            if (data != ajax_object.content_hash) {
+    if (now - loadtime > ajax_object.update_interval) {
+        jQuery.post( ajax_object.ajax_url + '?action=get_content_hash', function( data, status ) {
+            if ((data != ajax_object.content_hash) && (status == 'success')) {
                 location.reload(true);
                 return;
+            } else {
+                loadtime = new Date().getTime();
             }
 
         });
