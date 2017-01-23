@@ -426,6 +426,7 @@ class TrumanDigitalSign
                 ?>
             </select> Seconds
         </p>
+        <input type="hidden" name="truman_sign_metaboxes_submitted" value="1" />
         <?php
     }
 
@@ -437,7 +438,6 @@ class TrumanDigitalSign
     }
     public function trumansign_save_details($post_id) {
         global $post;
-        $slug = 'book';
         if ('post' != $post->post_type) {
             return;
         }
@@ -448,23 +448,24 @@ class TrumanDigitalSign
         if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
             return $post_id;
         }
-        update_post_meta($post_id, "bgcolor", $_POST["bgcolor"]);
-        update_post_meta($post_id, "textcolor", $_POST["textcolor"]);
-        if ($_POST["hidetitle"] == "1") {
-            update_post_meta($post_id, "hidetitle", "1");
-        } else {
-            delete_post_meta($post_id, "hidetitle");
+        if ($_POST['truman_sign_metaboxes_submitted'] == "1") {
+            update_post_meta($post_id, "bgcolor", $_POST["bgcolor"]);
+            update_post_meta($post_id, "textcolor", $_POST["textcolor"]);
+            if ($_POST["hidetitle"] == "1") {
+                update_post_meta($post_id, "hidetitle", "1");
+            } else {
+                delete_post_meta($post_id, "hidetitle");
+            }
+            if ($_POST["fittext"] == "1") {
+                update_post_meta($post_id, "fittext", "1");
+            } else {
+                delete_post_meta($post_id, "fittext");
+            }
+            update_post_meta($post_id, "slideimage", $_POST["slideimage"]);
+            update_post_meta($post_id, "slidevideo", $_POST["slidevideo"]);
+            update_post_meta($post_id, "slideimagesize", $_POST["slideimagesize"]);
+            update_post_meta($post_id, "slideduration", $_POST["slideduration"]);
         }
-        if ($_POST["fittext"] == "1") {
-            update_post_meta($post_id, "fittext", "1");
-        } else {
-            delete_post_meta($post_id, "fittext");
-        }
-        update_post_meta($post_id, "slideimage", $_POST["slideimage"]);
-        update_post_meta($post_id, "slidevideo", $_POST["slidevideo"]);
-        update_post_meta($post_id, "slideimagesize", $_POST["slideimagesize"]);
-        update_post_meta($post_id, "slideduration", $_POST["slideduration"]);
-
     }
 
     public function remove_admin_bar() {
