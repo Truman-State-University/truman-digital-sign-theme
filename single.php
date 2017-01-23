@@ -1,5 +1,4 @@
 <?php get_header();
-wp_reset_query();
 ?>
     <div id="slide-carousel" class="carousel<?php if ( get_theme_mod( 'slideeffect' ) == '1') { echo " slide"; } ?>" data-interval="false">
 

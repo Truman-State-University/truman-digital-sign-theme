@@ -37,6 +37,11 @@ jQuery( window).ready( function(){
         startVideo();
     })
 
+    jQuery.post( ajax_object.ajax_url + '?action=get_content_hash', function( data, status ) {
+        if (status == 'success') {
+            ajax_object.content_hash = data;
+        }
+    });
 } );
 
 function checkForRefresh() {

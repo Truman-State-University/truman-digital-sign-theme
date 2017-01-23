@@ -53,8 +53,7 @@ class TrumanDigitalSign
             array(
                 'ajax_url' => admin_url('admin-ajax.php'),
                 'footer_height' => get_theme_mod('footer_height', 15),
-                'update_interval' => get_theme_mod('update_interval', 5)* MINUTE_IN_SECONDS * 1000,
-                'content_hash' => $this->get_content_hash()
+                'update_interval' => get_theme_mod('update_interval', 5)* MINUTE_IN_SECONDS * 1000
             )
         );
     }
