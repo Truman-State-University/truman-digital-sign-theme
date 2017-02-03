@@ -65,21 +65,21 @@ class TrumanDigitalSign
         if ('post' == $post_type) {
             wp_enqueue_script(
                 'jquery-minicolors-script',
-                get_stylesheet_directory_uri() . '/jquery-minicolors-master/jquery.minicolors.js',
+                get_template_directory_uri() . '/jquery-minicolors-master/jquery.minicolors.js',
                 array(
                     'jquery'
                 )
             );
             wp_enqueue_script(
                 'trumansign-admin',
-                get_stylesheet_directory_uri() . '/js/trumansign-admin.js',
+                get_template_directory_uri() . '/js/trumansign-admin.js',
                 array(
                     'jquery'
                 )
             );
             wp_enqueue_style(
                 'jquery-minicolors-script',
-                get_stylesheet_directory_uri() . '/jquery-minicolors-master/jquery.minicolors.css'
+                get_template_directory_uri() . '/jquery-minicolors-master/jquery.minicolors.css'
             );
         }
     }
