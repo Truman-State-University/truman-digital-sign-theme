@@ -415,16 +415,7 @@ class TrumanDigitalSign
             }; ?>" /></p>
 
         <p><label for="slideduration">Slide Duration: </label>
-            <select name="slideduration" id="slideduration">
-                <?php for ($i = 1; $i <= 20; $i++) {
-                    ?>
-                    <option value="<?php echo $i; ?>"<?php if ($slideduration == $i) {
-                        echo "selected=\"selected\"";
-                    }; ?>><?php echo $i; ?></option>
-                    <?php
-                }
-                ?>
-            </select> Seconds
+            <input type="number" name="slideduration" id="slideduration" value="<?php echo $slideduration; ?>"/ style="text-align: right; width: 100px"> Seconds
         </p>
         <input type="hidden" name="truman_sign_metaboxes_submitted" value="1" />
         <?php
