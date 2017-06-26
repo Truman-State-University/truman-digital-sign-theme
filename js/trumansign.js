@@ -49,7 +49,7 @@ function checkForRefresh() {
     if (now - loadtime > ajax_object.update_interval) {
         jQuery.post( ajax_object.ajax_url + '?action=get_content_hash', function( data, status ) {
             if ((data != ajax_object.content_hash) && (status == 'success')) {
-                location.reload(true);
+                window.location.href = window.location.origin + "?" + data;
                 return;
             } else {
                 loadtime = new Date().getTime();
