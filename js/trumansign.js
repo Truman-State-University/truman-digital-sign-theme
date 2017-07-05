@@ -109,9 +109,7 @@ function startVideo() {
     }
     youTubeId = jQuery('#slide-carousel .active .youtube').data('video');
     playerId = jQuery('#slide-carousel .active .youtube').attr('id');
-        console.log(youTubeId);
     var ytduration = parseInt(jQuery('#slide-carousel .active').attr('data-interval')/1000);
-    console.log(ytduration);
     if (youTubeId != '') {
         if (youTubeReady) {
             if (players[playerId]) {
@@ -140,7 +138,6 @@ function startVideo() {
             }
         } else {
             {
-                console.log('setting timeout');
                 setTimeout(startVideo, 100);
             }
         }

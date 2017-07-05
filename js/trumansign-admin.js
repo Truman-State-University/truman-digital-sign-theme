@@ -39,6 +39,12 @@ jQuery(document).ready(function($){
     if (jQuery('#preview')) {
         jQuery('#preview').height(jQuery('#preview').width()*(9/16));
     }
+
+    jQuery('#youTubeId').blur(function() {
+        youTubeURL = jQuery('#youTubeId').val();
+        youTubeId = YouTubeGetID(youTubeURL);
+        jQuery('#youTubeId').val(youTubeId);
+    });
 });
 
 function showDimensions(url){
@@ -49,3 +55,25 @@ function showDimensions(url){
         src  : url
     });
 }
+
+/**
+ * Get YouTube ID from various YouTube URL
+ * @author: takien
+ * @url: http://takien.com
+ * For PHP YouTube parser, go here http://takien.com/864
+ * From: https://gist.github.com/takien/4077195
+ */
+
+function YouTubeGetID(url){
+    var ID = '';
+    url = url.replace(/(>|<)/gi,'').split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
+    if(url[2] !== undefined) {
+        ID = url[2].split(/[^0-9a-z_\-]/i);
+        ID = ID[0];
+    }
+    else {
+        ID = url;
+    }
+    return ID;
+}
+
