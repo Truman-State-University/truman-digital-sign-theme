@@ -5,7 +5,7 @@ Theme URI:
 Author: Truman State University
 Author URI: http://www.truman.edu
 Description: Bootstrap Based Digital Sign
-Version: 1.0.14
+Version: 1.1.0
 Text Domain: truman-digital-sign-theme
 GitHub Theme URI: https://github.com/Truman-State-University/truman-digital-sign-theme/
 License: BSD 3-Clause License
@@ -336,4 +336,9 @@ tr.forecast {
 }
 .bypostauthor {
 
+}
+
+.youtube {
+    width: 100%;
+    height: 100%;
 }

@@ -9,6 +9,7 @@
     $slideimagesize = $custom["slideimagesize"][0];
     $slideduration = $custom["slideduration"][0];
     $slidevideo = $custom["slidevideo"][0];
+    $youTubeId =  $custom["youTubeId"][0];
 
     if ($slideimage != "") {
         $stylestr = " background-image: url('{$slideimage}'); background-size: {$slideimagesize}; background-repeat: no-repeat";
@@ -35,6 +36,9 @@
                 </video>
                 <?php
             } ?>
+            <div class="youtube" id="youtube<?php echo $postid; ?>" data-video="<?php echo $youTubeId; ?>">
+
+            </div>
             <div class="textcontent<?php echo $fittextstr; ?>">
                 <?php if ($hidetitle != "1") {
                     echo("<h1>" . get_the_title() ."</h1>");

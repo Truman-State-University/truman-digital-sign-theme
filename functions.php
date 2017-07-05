@@ -49,6 +49,7 @@ class TrumanDigitalSign
         wp_enqueue_script('bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', array('jquery'), '3.3.4', true);
         wp_enqueue_script('theme-scripts', get_template_directory_uri() . '/js/trumansign.js', array('jquery'), $my_theme->get( 'Version' ));
         wp_enqueue_script('textfit', get_template_directory_uri() . '/js/textFit.js', '2.3.1');
+        wp_enqueue_script('iframe_api', 'https://www.youtube.com/iframe_api');
         wp_localize_script('theme-scripts', 'ajax_object',
             array(
                 'ajax_url' => admin_url('admin-ajax.php'),
@@ -357,6 +358,7 @@ class TrumanDigitalSign
         $slideimage = $custom["slideimage"][0];
         $slideimagesize = $custom["slideimagesize"][0];
         $slidevideo = $custom["slidevideo"][0];
+        $youTubeId =  $custom["youTubeId"][0];
         $slideduration = $custom["slideduration"][0];
         if ($slideduration == '') {
             $slideduration = 8;
@@ -401,6 +403,10 @@ class TrumanDigitalSign
                    style="height: auto;" size="70">
             <input type="button" class="button custom_media" name="slidevideo_button" id="slidevideo_button"
                    value="Upload/Browse"/>
+        </p>
+        <p><label for="slidevideo">YouTube Video ID:</label>
+            <input type="text" id="youTubeId" name="youTubeId" value="<?php echo $youTubeId; ?>"
+                   style="height: auto;" size="70">
         </p>
         <p><label for="textcolor">Select Text Color: </label>
             <input type="text" id="textcolor" name="textcolor" value="<?php echo $textcolor; ?>" style="height: auto;">
@@ -454,6 +460,7 @@ class TrumanDigitalSign
             }
             update_post_meta($post_id, "slideimage", $_POST["slideimage"]);
             update_post_meta($post_id, "slidevideo", $_POST["slidevideo"]);
+            update_post_meta($post_id, "youTubeId", $_POST["youTubeId"]);
             update_post_meta($post_id, "slideimagesize", $_POST["slideimagesize"]);
             update_post_meta($post_id, "slideduration", $_POST["slideduration"]);
         }

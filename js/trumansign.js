@@ -3,6 +3,9 @@
  */
 var t;
 var loadtime = new Date().getTime();
+var youTubeReady = false;
+var youTubePlaying = null;
+var players = new Array();
 
 jQuery.ajaxSetup ({
     // Disable caching of AJAX responses
@@ -31,6 +34,11 @@ jQuery( window).ready( function(){
             currentvideo.pause();
             currentvideo.currentTime = 0;
         }
+        if (youTubePlaying == true) {
+            players[youTubePlaying].stopVideo();
+            players[youTubePlaying].seekTo(0);
+            youTubePlaying = null;
+        }
         var duration = jQuery(this).find('.active').attr('data-interval');
         applyTextFit();
         t = setTimeout("jQuery('#slide-carousel').carousel('next');", duration);
@@ -42,8 +50,13 @@ jQuery( window).ready( function(){
             ajax_object.content_hash = data;
         }
     });
+
+
 } );
 
+function onYouTubeIframeAPIReady() {
+    youTubeReady = true;
+}
 function checkForRefresh() {
     var now = new Date().getTime();
     if (now - loadtime > ajax_object.update_interval) {
@@ -94,6 +107,56 @@ function startVideo() {
     } else {
         currentvideo = "";
     }
+    youTubeId = jQuery('#slide-carousel .active .youtube').data('video');
+    playerId = jQuery('#slide-carousel .active .youtube').attr('id');
+        console.log(youTubeId);
+    var ytduration = parseInt(jQuery('#slide-carousel .active').attr('data-interval')/1000);
+    console.log(ytduration);
+    if (youTubeId != '') {
+        if (youTubeReady) {
+            if (players[playerId]) {
+                players[playerId].playVideo();
+            } else {
+                players[playerId] = new YT.Player(playerId, {
+                    height: '100%',
+                    width: '100%',
+                    playerVars: {
+                        autoplay: 1,
+                        loop: 1,
+                        controls: 0,
+                        showinfo: 0,
+                        autohide: 1,
+                        modestbranding: 1,
+                        vq: 'hd1080',
+                        end: ytduration
+                    },
+                    videoId: youTubeId,
+                    events: {
+                        'onReady': onPlayerReady,
+                        'onStateChange': onPlayerStateChange
+                    }
+                });
+                youTubePlaying = playerId;
+            }
+        } else {
+            {
+                console.log('setting timeout');
+                setTimeout(startVideo, 100);
+            }
+        }
+    }
+}
+
+function onPlayerReady(event) {
+    event.target.playVideo();
+}
+
+var done = false;
+function onPlayerStateChange(event) {
+
+}
+function stopVideo() {
+    player.stopVideo();
 }
 
 function applyTextFit() {
