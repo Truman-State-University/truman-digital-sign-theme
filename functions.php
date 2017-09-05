@@ -18,6 +18,8 @@ class TrumanDigitalSign
         add_action('wp_head', array($this, 'trumansign_custom_css_output'));
         add_action('wp_ajax_get_content_hash', array($this, 'trumansign_ajaxcontenthash'));
         add_action('wp_ajax_nopriv_get_content_hash', array($this, 'trumansign_ajaxcontenthash'));
+        add_action('wp_ajax_get_time', array($this, 'trumansign_ajaxtime'));
+        add_action('wp_ajax_nopriv_get_time', array($this, 'trumansign_ajaxtime'));
         add_action('pre_get_posts', array($this, 'change_num_posts'));
         add_filter('widget_text', 'do_shortcode');
         add_action('widgets_init', array($this, 'register_truman_sign_clock_widget'));
@@ -472,6 +474,12 @@ class TrumanDigitalSign
 
     public function trumansign_ajaxcontenthash() {
         echo $this->get_content_hash();
+        die();
+    }
+
+
+    public function trumansign_ajaxtime() {
+        echo time()*1000;
         die();
     }
 

@@ -1,9 +1,26 @@
 // Create two variable with the names of the months and days in an array
 var monthNames = [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec" ];
 var dayNames= ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+var currentTime;
+
+jQuery( window).ready( function() {
+    initClock();
+});
+
+function startClockInterval() {
+    console.log('running startClockInterval');
+    if (!clockInterval) {
+        updateClock();
+        var clockInterval = setInterval(function () {
+            updateClock()
+        }, 1000);
+    }
+}
 
 function updateClock() {
-    var currentTime = new Date();
+    //var currentTime = new Date();
+    console.log(currentTime);
+    currentTime = new Date(currentTime.getTime() + 1000);
     var currentHours = currentTime.getHours ( );
     var currentMinutes = currentTime.getMinutes ( );
 
@@ -23,20 +40,24 @@ function updateClock() {
     jQuery("#time").html(currentTimeString);
     jQuery('#date').html(dayNames[currentTime.getDay()] + " " + monthNames[currentTime.getMonth()] + ' ' + currentTime.getDate() +  ', ' + currentTime.getFullYear());
 }
-updateClock();
-var currentTime = new Date();
-secondsLeft = 60-currentTime.getSeconds();
-console.log(secondsLeft);
-setTimeout(function() {
-        startClockInterval();
-    },secondsLeft*1000);
 
-function startClockInterval() {
-    console.log('running startClockInterval');
-    if (!clockInterval) {
+function initClock() {
+    console.log(useServerTime);
+    if (useServerTime == 1) {
+        jQuery.post( ajax_object.ajax_url + '?action=get_time', function( data, status ) {
+            if (status == 'success') {
+                currentTime = new Date(parseInt(data));
+                console.log(parseInt(data));
+                console.log(currentTime);
+                updateClock();
+                startClockInterval();
+            }
+        });
+    } else {
+        currentTime = new Date();
         updateClock();
-        var clockInterval = setInterval(function () {
-            updateClock()
-        }, 1000);
+        startClockInterval();
     }
+
 }
+
