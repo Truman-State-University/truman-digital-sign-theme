@@ -8,7 +8,6 @@ jQuery( window).ready( function() {
 });
 
 function startClockInterval() {
-    console.log('running startClockInterval');
     if (!clockInterval) {
         updateClock();
         var clockInterval = setInterval(function () {
@@ -19,7 +18,6 @@ function startClockInterval() {
 
 function updateClock() {
     //var currentTime = new Date();
-    console.log(currentTime);
     currentTime = new Date(currentTime.getTime() + 1000);
     var currentHours = currentTime.getHours ( );
     var currentMinutes = currentTime.getMinutes ( );
@@ -42,13 +40,10 @@ function updateClock() {
 }
 
 function initClock() {
-    console.log(useServerTime);
     if (useServerTime == 1) {
         jQuery.post( ajax_object.ajax_url + '?action=get_time', function( data, status ) {
             if (status == 'success') {
                 currentTime = new Date(parseInt(data));
-                console.log(parseInt(data));
-                console.log(currentTime);
                 updateClock();
                 startClockInterval();
             }
