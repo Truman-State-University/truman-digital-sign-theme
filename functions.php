@@ -360,7 +360,9 @@ class TrumanDigitalSign
         $slideimage = $custom["slideimage"][0];
         $slideimagesize = $custom["slideimagesize"][0];
         $slidevideo = $custom["slidevideo"][0];
+        $videoSound = $custom["videoSound"][0];
         $youTubeId =  $custom["youTubeId"][0];
+        $youtubeSound = $custom["youtubeSound"][0];
         $slideduration = $custom["slideduration"][0];
         if ($slideduration == '') {
             $slideduration = 8;
@@ -405,10 +407,12 @@ class TrumanDigitalSign
                    style="height: auto;" size="70">
             <input type="button" class="button custom_media" name="slidevideo_button" id="slidevideo_button"
                    value="Upload/Browse"/>
+            <input type="checkbox" id="videoSound" name="videoSound" value="1" <?php if ($videoSound == 1) { echo " checked=\"checked\""; }; ?>/> <label for="videoSound">Allow Sound?</label>
         </p>
         <p><label for="slidevideo">YouTube Video ID:</label>
             <input type="text" id="youTubeId" name="youTubeId" value="<?php echo $youTubeId; ?>"
                    style="height: auto;" size="70">
+            <input type="checkbox" id="youtubeSound" name="youtubeSound" value="1" <?php if ($youtubeSound == 1) { echo " checked=\"checked\""; }; ?>/> <label for="youtubeSound">Allow Sound?</label>
         </p>
         <p><label for="textcolor">Select Text Color: </label>
             <input type="text" id="textcolor" name="textcolor" value="<?php echo $textcolor; ?>" style="height: auto;">
@@ -465,6 +469,16 @@ class TrumanDigitalSign
             update_post_meta($post_id, "youTubeId", $_POST["youTubeId"]);
             update_post_meta($post_id, "slideimagesize", $_POST["slideimagesize"]);
             update_post_meta($post_id, "slideduration", $_POST["slideduration"]);
+            if ($_POST["videoSound"] == "1") {
+                update_post_meta($post_id, "videoSound", "1");
+            } else {
+                delete_post_meta($post_id, "videoSound");
+            }
+            if ($_POST["youtubeSound"] == "1") {
+                update_post_meta($post_id, "youtubeSound", "1");
+            } else {
+                delete_post_meta($post_id, "youtubeSound");
+            }
         }
     }
 

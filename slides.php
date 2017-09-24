@@ -10,6 +10,8 @@
     $slideduration = $custom["slideduration"][0];
     $slidevideo = $custom["slidevideo"][0];
     $youTubeId =  $custom["youTubeId"][0];
+    $videoSound = $custom["videoSound"][0];
+    $youtubeSound = $custom["youtubeSound"][0];
 
     if ($slideimage != "") {
         $stylestr = " background-image: url('{$slideimage}'); background-size: {$slideimagesize}; background-repeat: no-repeat";
@@ -31,12 +33,12 @@
         <div class="slidecontent" style="background-color: <?php echo $bgcolor;?>; color: <?php echo $textcolor;?>; <?php echo $stylestr;?>">
             <?php if ($slidevideo != "") {
                 ?>
-                <video controls="false" class="slidevideo">
+                <video controls="false" class="slidevideo" <?php if ($videoSound != "1") { echo "muted=\"true\""; } ?> playsinline>
                     <source src="<?php echo $slidevideo; ?>" type="video/mp4" />
                 </video>
                 <?php
             } ?>
-            <div class="youtube" id="youtube<?php echo $postid; ?>" data-video="<?php echo $youTubeId; ?>">
+            <div class="youtube" id="youtube<?php echo $postid; ?>" data-video="<?php echo $youTubeId; ?>" <?php if ($youtubeSound != "1") { echo "data-muted=\"1\""; } ?>>
 
             </div>
             <div class="textcontent<?php echo $fittextstr; ?>">

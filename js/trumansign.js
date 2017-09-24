@@ -125,6 +125,7 @@ function startVideo() {
                         showinfo: 0,
                         autohide: 1,
                         modestbranding: 1,
+                        playsinline: 1,
                         vq: 'hd1080',
                         end: ytduration
                     },
@@ -145,6 +146,10 @@ function startVideo() {
 }
 
 function onPlayerReady(event) {
+    muted = jQuery('#slide-carousel .active .youtube').data('muted');
+    if (muted == 1) {
+        event.target.mute();
+    }
     event.target.playVideo();
 }
 
