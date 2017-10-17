@@ -308,6 +308,24 @@ class TrumanDigitalSign
             )
         );
 
+
+	    $wp_customize->add_setting(
+		    'default_duration',
+		    array(
+			    'default' => 8,
+			    'sanitize_callback' => 'absint',
+		    )
+	    );
+
+	    $wp_customize->add_control(
+		    'default_duration',
+		    array(
+			    'type' => 'number',
+			    'label' => 'Default Slide Duration (in seconds)',
+			    'section' => 'trumansign_settings'
+		    )
+	    );
+
     }
 
 
@@ -365,7 +383,10 @@ class TrumanDigitalSign
         $youtubeSound = $custom["youtubeSound"][0];
         $slideduration = $custom["slideduration"][0];
         if ($slideduration == '') {
-            $slideduration = 8;
+            $slideduration = get_theme_mod( 'default_duration' );
+	        if ($slideduration == 0 || is_null($slideduration)) {
+	            $slideduration = 8;
+            }
         }
         ?>
         <p><label for="bgcolor">Select Background Color: </label>
