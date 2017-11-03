@@ -3,8 +3,61 @@
 require_once('clockwidget.php');
 $trumansign = new TrumanDigitalSign();
 
+
+
 class TrumanDigitalSign
 {
+const SCREENSAVER_TIMES = array(
+    '0:00' => '12:00 am',
+    '0:30' => '12:30 am',
+    '1:00' => '1:00 am',
+    '1:30' => '1:30 am',
+    '2:00' => '2:00 am',
+    '2:30' => '2:30 am',
+    '3:00' => '3:00 am',
+    '3:30' => '3:30 am',
+    '4:00' => '4:00 am',
+    '4:30' => '4:30 am',
+    '5:00' => '5:00 am',
+    '5:30' => '5:30 am',
+    '6:00' => '6:00 am',
+    '6:30' => '6:30 am',
+    '7:00' => '7:00 am',
+    '7:30' => '7:30 am',
+    '8:00' => '8:00 am',
+    '8:30' => '8:30 am',
+    '9:00' => '9:00 am',
+    '9:30' => '9:30 am',
+    '10:00' => '10:00 am',
+    '10:30' => '10:30 am',
+    '11:00' => '11:00 am',
+    '11:30' => '11:30 am',
+    '12:00' => '12:00 pm',
+    '12:30' => '12:30 pm',
+    '13:00' => '1:00 pm',
+    '13:30' => '1:30 pm',
+    '14:00' => '2:00 pm',
+    '14:30' => '2:30 pm',
+    '15:00' => '3:00 pm',
+    '15:30' => '3:30 pm',
+    '16:00' => '4:00 pm',
+    '16:30' => '4:30 pm',
+    '17:00' => '5:00 pm',
+    '17:30' => '5:30 pm',
+    '18:00' => '6:00 pm',
+    '18:30' => '6:30 pm',
+    '19:00' => '7:00 pm',
+    '19:30' => '7:30 pm',
+    '20:00' => '8:00 pm',
+    '20:30' => '8:30 pm',
+    '21:00' => '9:00 pm',
+    '21:30' => '9:30 pm',
+    '22:00' => '10:00 pm',
+    '22:30' => '10:30 pm',
+    '23:00' => '11:00 pm',
+    '23:30' => '11:30 pm'
+    );
+
     public function __construct() {
 
         add_action('init', array($this,'register_sidebars'));
@@ -42,6 +95,15 @@ class TrumanDigitalSign
             'before_title' => '<h4>',
             'after_title' => '</h4>',
         ));
+
+	    // Screensaver Widgets
+	    register_sidebar(array('name' => 'screensaver',
+           'before_widget' => '',
+           'after_widget' => '',
+           'before_title' => '',
+           'after_title' => '',
+	    ));
+
     }
     public function trumansign_scripts() {
         $my_theme = wp_get_theme();
@@ -50,13 +112,16 @@ class TrumanDigitalSign
         wp_enqueue_style('josefin', 'https://fonts.googleapis.com/css?family=Josefin+Sans:400,700');
         wp_enqueue_script('bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js', array('jquery'), '3.3.4', true);
         wp_enqueue_script('theme-scripts', get_template_directory_uri() . '/js/trumansign.js', array('jquery'), $my_theme->get( 'Version' ));
-        wp_enqueue_script('textfit', get_template_directory_uri() . '/js/textFit.js', '2.3.1');
+        wp_enqueue_script('textfill', get_template_directory_uri() . '/js/jquery.textfill.min.js', '0.6.0');
         wp_enqueue_script('iframe_api', 'https://www.youtube.com/iframe_api');
         wp_localize_script('theme-scripts', 'ajax_object',
             array(
                 'ajax_url' => admin_url('admin-ajax.php'),
                 'footer_height' => get_theme_mod('footer_height', 15),
-                'update_interval' => get_theme_mod('update_interval', 5)* MINUTE_IN_SECONDS * 1000
+                'update_interval' => get_theme_mod('update_interval', 5)* MINUTE_IN_SECONDS * 1000,
+                'screensaver_enabled' => get_theme_mod('enable_screensaver', 0),
+                'screensaver_start' => get_theme_mod('screensaver_start', '10:00'),
+                'screensaver_stop' => get_theme_mod('screensaver_stop', '7:00'),
             )
         );
     }
@@ -323,6 +388,58 @@ class TrumanDigitalSign
 			    'type' => 'number',
 			    'label' => 'Default Slide Duration (in seconds)',
 			    'section' => 'trumansign_settings'
+		    )
+	    );
+
+
+	    $wp_customize->add_setting(
+		    'enable_screensaver',
+		    array(
+			    'default' => 0
+		    )
+	    );
+
+	    $wp_customize->add_control(
+		    'enable_screensaver',
+		    array(
+			    'type' => 'checkbox',
+			    'label' => 'Enable Screensaver:',
+			    'section' => 'trumansign_settings',
+		    )
+	    );
+
+	    $wp_customize->add_setting(
+		    'screensaver_start',
+		    array(
+			    'default' => '22:00'
+		    )
+	    );
+
+	    $wp_customize->add_control(
+		    'screensaver_start',
+		    array(
+			    'type' => 'select',
+			    'label' => 'Screensaver Start Time:',
+			    'section' => 'trumansign_settings',
+			    'choices' => $this::SCREENSAVER_TIMES
+			    )
+	    );
+
+
+	    $wp_customize->add_setting(
+		    'screensaver_stop',
+		    array(
+			    'default' => '7:00'
+		    )
+	    );
+
+	    $wp_customize->add_control(
+		    'screensaver_stop',
+		    array(
+			    'type' => 'select',
+			    'label' => 'Screensaver End Time:',
+			    'section' => 'trumansign_settings',
+			    'choices' => $this::SCREENSAVER_TIMES
 		    )
 	    );
 

@@ -43,9 +43,11 @@
             </div>
             <div class="textcontent<?php echo $fittextstr; ?>">
                 <?php if ($hidetitle != "1") {
-                    echo("<h1>" . get_the_title() ."</h1>");
+                    echo("<h1 class=\"slidetitle\">" . get_the_title() ."</h1>");
                 } ?>
-                <?php the_content();?>
+                <div class="textbody">
+                    <article><?php the_content();?></article>
+                </div>
                 <?php echo $the_query->current_post;?>
             </div>
         </div>

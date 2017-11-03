@@ -16,5 +16,10 @@ echo('</div>');
 </div>
 <?php wp_footer(); ?>
 </div>
+<div id="screensaver">
+    <div id="screensaver_content">
+		<?php dynamic_sidebar( 'screensaver' ); ?>
+    </div>
+</div>
 </body>
 </html>

@@ -28,20 +28,19 @@ class Truman_Sign_Clock_Widget extends WP_Widget
      */
     public function widget($args, $instance)
     {
+
         $my_theme = wp_get_theme();
+	    wp_enqueue_script('clock_script', get_template_directory_uri().'/js/clock.js?version='.$my_theme->get( 'Version' ));
+
         echo $args['before_widget'];
-        echo '<div id="time"></div>';
-        echo '<div id="date"></div>';
+        echo '<div class="time"></div>';
+        echo '<div class="date"></div>';
         echo sprintf(
              '<script type="text/javascript">
                 var useServerTime = %s;
              </script>
-            <script type="text/javascript" src="%s/js/clock.js?version=%s" /></script>
             ',
-            $instance['useServerTime'] ? 1 : 0,
-            get_template_directory_uri(),
-            $my_theme->get( 'Version' )
-
+            $instance['useServerTime'] ? 1 : 0
          );
         echo $args['after_widget'];
     }

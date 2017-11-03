@@ -15,6 +15,7 @@ jQuery( window ).load( function() {
     applyTextFit();
 });
 jQuery( window).ready( function(){
+    enableScreensaver();
     setheights();
     updateIndicators();
 
@@ -70,8 +71,31 @@ function checkForRefresh() {
 
         });
     }
+    enableScreensaver();
 }
 
+function enableScreensaver() {
+    if (ajax_object.screensaver_enabled == 1) {
+        var now = new Date().getTime();
+        var starttime =  new Date();
+        var stoptime =  new Date();
+        startarray = ajax_object.screensaver_start.split(':');
+        starttime.setHours(startarray[0]);
+        starttime.setMinutes(startarray[1]);
+        stoparray = ajax_object.screensaver_stop.split(':');
+        stoptime.setHours(stoparray[0]);
+        stoptime.setMinutes(stoparray[1]);
+
+        console.log(starttime);
+        console.log(stoptime);
+        if (now > starttime || now < stoptime) {
+            showScreensaver();
+        } else {
+            hideScreensaver();
+        }
+    }
+
+}
 
 jQuery( window ).resize( setheights );
 
@@ -164,9 +188,18 @@ function stopVideo() {
 function applyTextFit() {
     if (jQuery('#slide-carousel .active').find('.fittext').length > 0) {
         currentslide = jQuery('#slide-carousel .active').find('.fittext')[0];
-        textFit(currentslide);
+        maxHeight = (parseInt(jQuery(currentslide).height()) - parseInt(jQuery(jQuery(currentslide).find('.slidetitle')[0]).height()))*.9;
+        jQuery(currentslide).textfill({'innerTag': 'article', 'maxFontPixels': 150, 'explicitHeight': maxHeight});
         jQuery(currentslide).removeClass('fittext')
     }
+}
+
+function showScreensaver() {
+    jQuery('#screensaver').fadeIn();
+}
+
+function hideScreensaver() {
+    jQuery('#screensaver').fadeOut();
 }
 
 

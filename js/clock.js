@@ -35,8 +35,8 @@ function updateClock() {
     var currentTimeString = currentHours + ":" + currentMinutes;
 
 
-    jQuery("#time").html(currentTimeString);
-    jQuery('#date').html(dayNames[currentTime.getDay()] + " " + monthNames[currentTime.getMonth()] + ' ' + currentTime.getDate() +  ', ' + currentTime.getFullYear());
+    jQuery(".time").html(currentTimeString);
+    jQuery('.date').html(dayNames[currentTime.getDay()] + " " + monthNames[currentTime.getMonth()] + ' ' + currentTime.getDate() +  ', ' + currentTime.getFullYear());
 }
 
 function initClock() {
