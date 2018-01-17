@@ -636,7 +636,12 @@ const SCREENSAVER_TIMES = array(
     }
 
     public function get_content_hash() {
-        $my_theme = wp_get_theme();
+	    if (function_exists('w3tc_dbcache_flush')) {
+	        w3tc_dbcache_flush();
+		    w3tc_objectcache_flush();
+		    w3tc_pgcache_flush();
+	    }
+	    $my_theme = wp_get_theme();
         $content = $my_theme->get( 'Version' );
         //get slides
         define('WP_USE_THEMES', false);
