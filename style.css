@@ -5,7 +5,7 @@ Theme URI:
 Author: Truman State University
 Author URI: http://www.truman.edu
 Description: Bootstrap Based Digital Sign
-Version: 1.1.6
+Version: 1.1.7
 Text Domain: truman-digital-sign-theme
 GitHub Theme URI: https://github.com/Truman-State-University/truman-digital-sign-theme/
 License: BSD 3-Clause License
@@ -24,12 +24,12 @@ Tags: theme-options, one-column, two-columns, translation-ready
         font-size: 6px;
     }
 }
+
 @media (min-width: 1200px) {
     html {
         font-size: 8px;
     }
 }
-
 
 /* =WordPress Core
 -------------------------------------------------------------- */
@@ -44,7 +44,7 @@ div.aligncenter {
 }
 
 .alignright {
-    float:right;
+    float: right;
     margin: 5px 0 20px 20px;
 }
 
@@ -111,48 +111,50 @@ a img.aligncenter {
 
 /* Text meant only for screen readers. */
 .screen-reader-text {
-	clip: rect(1px, 1px, 1px, 1px);
-	position: absolute !important;
-	height: 1px;
-	width: 1px;
-	overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
 }
 
 .screen-reader-text:focus {
-	background-color: #f1f1f1;
-	border-radius: 3px;
-	box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
-	clip: auto !important;
-	color: #21759b;
-	display: block;
-	font-size: 14px;
-	font-size: 0.875rem;
-	font-weight: bold;
-	height: auto;
-	left: 5px;
-	line-height: normal;
-	padding: 15px 23px 14px;
-	text-decoration: none;
-	top: 5px;
-	width: auto;
-	z-index: 100000; /* Above WP toolbar. */
+    background-color: #f1f1f1;
+    border-radius: 3px;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.6);
+    clip: auto !important;
+    color: #21759b;
+    display: block;
+    font-size: 14px;
+    font-size: 0.875rem;
+    font-weight: bold;
+    height: auto;
+    left: 5px;
+    line-height: normal;
+    padding: 15px 23px 14px;
+    text-decoration: none;
+    top: 5px;
+    width: auto;
+    z-index: 100000; /* Above WP toolbar. */
 }
 
 html, body {
-    margin:0;
-    padding:0;
-    height:100%;
-    cursor:none;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    cursor: none;
 }
+
 body.elementor-editor-active {
     cursor: default;
 }
+
 body {
     overflow: hidden;
 }
 
 a {
-    cursor:none;
+    cursor: none;
 }
 
 .row-no-padding [class*="col-"] {
@@ -161,16 +163,17 @@ a {
 }
 
 div.slidecontent {
-    width:100%;
-    height:100%;
-    min-height:100px;
-    overflow:hidden;
-    display:block;
+    width: 100%;
+    height: 100%;
+    min-height: 100px;
+    overflow: hidden;
+    display: block;
     font-size: 6rem;
     font-family: 'Josefin Sans', sans-serif;
     overflow: hidden;
     background-position: center;
 }
+
 div.slidecontent .textcontent {
     margin: 0 5%;
     position: absolute;
@@ -179,9 +182,11 @@ div.slidecontent .textcontent {
     width: 90%;
     height: 100%;
 }
+
 div.slidecontent {
     font-size: 7rem;
 }
+
 div.slidecontent h1 {
     font-size: 150%;
 }
@@ -200,12 +205,15 @@ div.slidecontent img {
     overflow: hidden;
     font-size: 2rem;
 }
+
 .sidebar h4, .sidebar h4 {
     font-size: 3rem;
 }
+
 .sidebar .widget-area {
     margin: 0 2%;
 }
+
 #footer {
     height: 15%;
     background: #000;
@@ -247,6 +255,7 @@ div.slidecontent img {
     color: #fff;
     font-size: 4rem;
 }
+
 .crs_div a {
     color: #fff;
 }
@@ -255,35 +264,42 @@ div.slidecontent img {
     text-align: center;
     height: 100%;
 }
+
 .widget-footer .textwidget {
     height: 100%;
 }
+
 tr.forecast {
-    background: rgba(255,255,255,.9);
+    background: rgba(255, 255, 255, .9);
 }
+
 .slidecontent .wp_wunderground img {
     width: 16rem;
     height: 16rem;
     max-width: 100%;
 }
+
 .wu-forecast-body {
     font-size: 4rem;
 }
+
 .wu-forecast-wrapper .wu-cond-highlow .wu-cond-low {
     display: block;
 }
+
 .wu-table-5 {
     width: 100%;
     text-align: center;
 }
+
 .rssfeed a {
     text-decoration: none;
     color: inherit;
     font-size: 4rem;
 }
 
-.table-striped>tbody>tr:nth-of-type(odd) {
-    background-color: rgba(5,5,5,.3);
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: rgba(5, 5, 5, .3);
 }
 
 #footer .wu-copyright {
@@ -293,20 +309,25 @@ tr.forecast {
 #footer span.wu-day-current-temp, #footer .wu-day-title * {
     color: #fff;
 }
+
 #footer .wu-wrapper {
     margin-top: 2rem;
 }
+
 #footer .wu-day-title {
     font-size: 8rem;
 }
+
 #footer .wu-day-title small {
     font-size: 2rem;
     margin-left: -1.5rem;
 }
+
 #footer .wu-icon img {
     width: 10rem;
     height: 10rem;
 }
+
 .slidevideo {
     position: fixed;
     top: 50%;
@@ -321,9 +342,11 @@ tr.forecast {
     -webkit-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
 }
+
 .carousel-indicators li {
     margin: 5px;
 }
+
 .carousel-indicators li.active {
     margin: 4px;
 
@@ -331,9 +354,11 @@ tr.forecast {
 
 .sticky {
 }
+
 .gallery-caption {
 
 }
+
 .bypostauthor {
 
 }
@@ -354,7 +379,6 @@ tr.forecast {
     display: none;
 }
 
-
 #screensaver_content {
     position: absolute;
     top: 30%;
@@ -364,8 +388,6 @@ tr.forecast {
     font-size: large;
     text-align: center;
 }
-
-
 
 @keyframes screensaverAnimate {
     0% {
